@@ -1,0 +1,12 @@
+body {
+    background-color: black;
+    background-image: url(imagenes/log4.jpg);
+    font-size: large;
+    font-family: Georgia;
+    font-weight: bold;
+    color: red;
+}
+
+h2 {
+    color: white;
+}

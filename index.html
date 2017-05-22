@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>log-in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilos/estiloLog.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/login.js"></script>
+</head>
+
+<body>
+    <div class="container col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+        <form class="form-login" onsubmit="verificarUsuario();return false">
+            <h2 class="form-ingreso-heading">Sistema :</h2>
+            <h2 class="form-ingreso-heading">Playa De Estacionamiento</h2><br>
+            <div class=form-group>
+                <label for="usuario" class="sr-only">Usuario</label>
+                <input type="text" id="usuario" title="Se necesita el usuario por favor" class="form-control" placeholder="Usuario" required="" autofocus="">
+                <label for="clave" class="sr-only">Password</label>
+                <input type="password" id="clave" title="Se necesita una contraseña" class="form-control" placeholder="Contraseña" required="" autofocus="">
+            </div>
+            <button class="btn btn-lg btn-success btn-block" type="submit">Entrar</button>
+            <div class=form-group id="informe">
+
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
