@@ -18,7 +18,7 @@ function verificarUsuario() {
         else if (retorno == "Administrador logeado")
             window.location.replace("administrador.html");
         else
-            window.location.replace("empleado.html");
+            window.location.replace("empleado.php");
     }
 
 }
