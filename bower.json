@@ -1,0 +1,16 @@
+{
+  "name": "tp-prog-labor-III",
+  "homepage": "https://github.com/daniel9898/TPProgramcion-laboratorioIII2017",
+  "authors": [
+    "daniel9898 <danyillusion@yahoo.com.ar>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "bootstrapvalidator": "bootstrapValidator#^0.5.3"
+  }
+}
