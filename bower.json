@@ -11,6 +11,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
-    "bootstrapvalidator": "bootstrapValidator#^0.5.3"
+    "bootstrapvalidator": "bootstrapValidator#^0.5.3",
+    "sweetalert2": "^6.6.4"
   }
 }

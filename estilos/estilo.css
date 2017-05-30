@@ -1,49 +1,59 @@
+
+* {
+  margin:0;
+  padding:0;
+  border-radius: 10px;
+}
+
+.table-hover>tbody>tr:hover {
+      background-color: #8387F1;
+      border-radius: 0px ;
+}
+.table-hover>tbody>tr>td {
+     
+       border-radius: 0px ;
+}
+ .btn{
+      box-shadow: 3px 2px 5px #000000;   
+  }
+
+
+#header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #333;
+    color: #FFFFFF;
+    padding: 10px;
+    z-index: 1;
+}
+
 body {
-    background-color: black;
-    background-image: url(imagenes/imagen-Blog.jpg);
-    font-size: xx-large;
-    /*tamaño de la fuente*/
-    font-family: Georgia;
-    font-weight: bold;
-    /*ancho de los caracteres*/
+  margin: 0 auto;
+  color:#f0f0f0;
+  background:#008B8B;
+  font-family:'Open Sans',sans-serif;
 }
 
-.btn {
-    background-color: chocolate;
-    font-weight: bold;
-    font-family: fantasy;
+caption {
+  font-size: 1.6em;
+  font-weight: 400;
+  padding: 10px 0;
 }
 
-#main-nav a {
-    line-height: 50%;
-    font-weight: bold;
-    color: #fff;
-    display: block;
-    padding: 14px 9px;
-    text-decoration: none;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, .5);
+
+input[type="text"],input[type="file"]{
+  width:100%;
+  background:#fff;
+  margin-bottom:1%;
+  border:2px solid #ccc;
+  padding:1%;
+  font-family:"Palatino Linotype", "Book Antiqua", serif;
+  font-size:120%;
+  font-weight: 800;
+  color:#555;
 }
 
-#contenedor {
-    font-size: medium;
-}
 
-#posteos {
-    font-size: large;
-    font-family: Georgia;
-    color: firebrick;
-}
 
-#log {
-    font-size: xx-large;
-    font-family: Georgia;
-    color: black;
-}
-
-div {
-    color: white;
-}
-
-h2 {
-    color: white;
-}

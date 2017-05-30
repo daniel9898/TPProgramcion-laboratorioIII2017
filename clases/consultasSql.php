@@ -45,23 +45,14 @@ function ComprobarSiExisteRegistro($id)
         return false;
 }
 
-/*function TraerRegistro($codigo)
+function TraerRegistro($id) 
 {
     $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
-    $consulta = $objetoAcceso->RetornarConsulta('select codigo_barra as codBarra,nombre,path_foto as pathFoto from producto where codigo_barra = '.$codigo.'');   
+    $consulta = $objetoAcceso->RetornarConsulta('select * from automovil where id_automovil = '.$id.'');   
     $consulta->execute();
-    $ProductoBuscado = $consulta->setFetchMode(PDO::FETCH_INTO,new Producto);
-    return $consulta;
-}*/
-
-/*function ModificarRegistro($campoAmodificar,$valor,$id)
-{
-    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
-    $consulta = $objetoAcceso->RetornarConsulta('update automovil set '.$campoAmodificar.' = :valor where id_automovil = :id');
-    $consulta->bindParam(":valor",$valor);
-    $consulta->bindParam(":id",$id);
-    return $consulta->execute();
-}*/
+    $autoBuscado = $consulta->fetchObject('Automovil');
+    return $autoBuscado;    
+}
 
 function ModificarRegistro($patente,$color,$marca,$id)
 {
@@ -79,6 +70,13 @@ function ModificarRegistro($patente,$color,$marca,$id)
     return $consulta->execute();
 }
 
-
+/*function ModificarRegistro($campoAmodificar,$valor,$id)
+{
+    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
+    $consulta = $objetoAcceso->RetornarConsulta('update automovil set '.$campoAmodificar.' = :valor where id_automovil = :id');
+    $consulta->bindParam(":valor",$valor);
+    $consulta->bindParam(":id",$id);
+    return $consulta->execute();
+}*/
 
 ?>

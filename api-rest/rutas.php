@@ -7,6 +7,7 @@ $app->get('/vehiculos',function($request,$response)
     $consulta = $objetoAcceso->RetornarConsulta("SELECT * from automovil");
     $consulta->execute();
     $arrayVehiculos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+    $arrayVehiculos = TraerRegistros();
    
     $parsedBody = $response->getBody();
     $parsedBody->write($response->withHeader("Content-type", "application/json"));  
@@ -24,7 +25,8 @@ $app->get('/vehiculos/{id}',function($request,$response)
     if(is_numeric($idAuto))
     {
     	$objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
-        $consulta = $objetoAcceso->RetornarConsulta('select patente,color,marca from automovil where id_automovil = '.$idAuto.''); 
+        $consulta = $objetoAcceso->RetornarConsulta('select * from automovil where id_automovil 
+            = '.$idAuto.''); 
         $consulta->execute();
         $autoBuscado = $consulta->fetchAll(PDO::FETCH_ASSOC);
         

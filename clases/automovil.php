@@ -3,15 +3,15 @@ require_once "AccesoDatos.php";
 
 class Automovil 
 {
-	//public $id;
+	public $id_automovil;
 	public $patente;
  	public $color;
   	public $marca;
 
-  	/*public function GetId()
+  	public function GetId()
 	{
-		return $this->id;
-	}*/
+		return $this->id_automovil;
+	}
 	public function GetPatente()
 	{
 		return $this->patente;
@@ -24,10 +24,10 @@ class Automovil
 	{
 		return $this->marca;
 	}
-	/*public function SetId($valor)
+	public function SetId($valor)
 	{
-		$this->id = $valor;
-	}*/
+		$this->id_automovil = $valor;
+	}
 	public function SetPatente($valor)
 	{
 		$this->patente = $valor;
@@ -41,14 +41,15 @@ class Automovil
 		$this->marca = $valor;
 	}
 	
-	function __construct($patente=NULL)
+	function __construct($id=NULL)
 	{
-		if($patente != NULL){
-			$obj = Automovil::TraerUnAutomovil($patente);
+		if($id != NULL){
+			$obj = Automovil::TraerUnAutomovil($id);
 			
 			$this->patente = $obj->patente;
 			$this->color = $obj->color;
 			$this->marca = $obj->$marca;
+			$this->id_automovil = $obj->id;
 		}
 	}
 
@@ -56,29 +57,6 @@ class Automovil
 	{
 	  	return $this->patente."-".$this->color."-".$this->marca;
 	}
-
-	/*public static function TraerUnAutomovil($patente) 
-	{	
-		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("select * from automovil where patente =:patente");
-		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL TraerUnaPersona(:id)");
-		$consulta->bindValue(':patente', $patente, PDO::PARAM_INT);
-		$consulta->execute();
-		$autoBuscado = $consulta->fetchObject('Automovil');
-		return $autoBuscado;	
-					
-	}
-
-	public static function InsertarAutomovil($automovil)
-	{
-		$objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-		$consulta =$objetoAccesoDato->RetornarConsulta("INSERT into automovil (patente,color,marca)values(:patente,:color,:marca)");
-		//$consulta =$objetoAccesoDato->RetornarConsulta("CALL Insertarautomovil (:nombre,:apellido,:dni,:foto)");
-		$consulta->bindValue(':patente',$automovil->patente, PDO::PARAM_STR);
-		$consulta->bindValue(':color', $automovil->color, PDO::PARAM_STR);
-		$consulta->bindValue(':marca', $automovil->marca, PDO::PARAM_STR);
-		$consulta->execute();		
-		return $objetoAccesoDato->RetornarUltimoIdInsertado();*/
 }
 
 ?>
