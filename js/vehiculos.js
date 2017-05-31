@@ -9,11 +9,14 @@ function validarVehiculo()
 	return datos;
 }
 
+var urlApi = 'http://localHost:8080/tp-master/api-rest/';
+//var urlApi = 'http://danielpereira.000webhostapp.com/api-rest/';
+
 function InsertarVehiculo()
 {
 	var datos = validarVehiculo();
 
-	jQuery.post('http://localHost:8080/tp-master/api-rest/vehiculos',datos,procesarRespuesta);
+	jQuery.post(urlApi +'vehiculos',datos,procesarRespuesta);
 
 	function procesarRespuesta(respuesta)
 	{
@@ -30,8 +33,8 @@ function Eliminar(id)
 {
 	console.log(id);
     $.ajax({
-   	url: 'http://localHost:8080/tp-master/api-rest/vehiculos/'+id,
-   	type: 'DELETE',
+   	url: urlApi +'vehiculosBaja/'+id,
+   	type: 'GET',
    })
    .done(function(data) {
    	console.log(data);
@@ -77,8 +80,8 @@ function Modificar()
   var id = localStorage.getItem('idAmodificar');
 
   $.ajax({
-  	url: 'http://localHost:8080/tp-master/api-rest/vehiculos/'+id,
-  	type: 'PUT',
+  	url: urlApi +'vehiculosMod/'+id,
+  	type: 'GET',
   	data : validarVehiculo()
   })
   .done(function(data) {

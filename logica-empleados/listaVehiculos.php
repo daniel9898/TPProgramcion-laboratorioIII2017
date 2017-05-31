@@ -12,7 +12,7 @@
 	require_once('../partes/barraMenu.php');
 	require_once('../clases/consultasSql.php');
 
-	$ArrayDeVehiculos = traerRegistros();
+	$ArrayDeVehiculos = Automovil::TraerRegistros(); 
 	
 	echo "<br><br><br><table class='table table-hover table-responsive'>
 			<thead>

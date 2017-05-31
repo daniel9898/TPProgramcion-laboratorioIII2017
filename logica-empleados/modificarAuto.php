@@ -14,7 +14,7 @@
     require_once "../clases/consultasSql.php";
     
     $idAuto = $_GET['id'];
-    $autoAmodificar = TraerRegistro($idAuto);
+    $autoAmodificar = Automovil::TraerRegistro($idAuto);
    ?> 
   
         <div class="container col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">

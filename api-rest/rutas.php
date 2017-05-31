@@ -2,17 +2,13 @@
 
 $app->get('/vehiculos',function($request,$response)
 {
-    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
     
-    $consulta = $objetoAcceso->RetornarConsulta("SELECT * from automovil");
-    $consulta->execute();
-    $arrayVehiculos = $consulta->fetchAll(PDO::FETCH_ASSOC);
-    $arrayVehiculos = TraerRegistros();
-   
+    $arrayVehiculos = Sql::TraerRegistros(); 
+    
     $parsedBody = $response->getBody();
     $parsedBody->write($response->withHeader("Content-type", "application/json"));  
     $parsedBody->write($response->withStatus(200));
-    $parsedBody->write(json_encode($arrayVehiculos)); 
+    $parsedBody->write(json_encode($arrayVehiculos));
 
 });
 
@@ -24,11 +20,7 @@ $app->get('/vehiculos/{id}',function($request,$response)
 
     if(is_numeric($idAuto))
     {
-    	$objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
-        $consulta = $objetoAcceso->RetornarConsulta('select * from automovil where id_automovil 
-            = '.$idAuto.''); 
-        $consulta->execute();
-        $autoBuscado = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $autoBuscado = Sql::TraerRegistro($idAuto); 
         
 	    if(!empty($autoBuscado))
 	    {
@@ -46,7 +38,7 @@ $app->get('/vehiculos/{id}',function($request,$response)
 $app->post('/vehiculos',function($request,$response) 
 {
     $parametros = $request->getParams('patente','color','marca');
-    $resp = InsertarRegistro($parametros['patente'],$parametros['color'],$parametros['marca']);
+    $resp = Sql::InsertarRegistro($parametros['patente'],$parametros['color'],$parametros['marca']);
  
     $status = 200; 
     if(!$resp)
@@ -59,16 +51,16 @@ $app->post('/vehiculos',function($request,$response)
 
 });
 
-$app->delete('/vehiculos/{id}',function($request,$response) 
+$app->get('/vehiculosBaja/{id}',function($request,$response) 
 {
     $idAuto = $request->getAttribute('id');
    	$status = 404;
    	$resp = false;
-    $existe = ComprobarSiExisteRegistro($idAuto);
+    $existe = Sql::ComprobarSiExisteRegistro($idAuto);
  
     if(is_numeric($idAuto) && $existe)
     {
-    	EliminarRegistro($idAuto);
+    	Sql::EliminarRegistro($idAuto);
     	$resp = true;
     	$status = 200;
     }
@@ -80,17 +72,17 @@ $app->delete('/vehiculos/{id}',function($request,$response)
 
 });
 
-$app->put('/vehiculos/{id}',function($request,$response) 
+$app->get('/vehiculosMod/{id}',function($request,$response) 
 {
     $idAuto = $request->getAttribute('id');
     $parametros = $request->getParams('patente','color','marca');
    	$status = 404;
    	$resp = false;
-    $existe = ComprobarSiExisteRegistro($idAuto);
+    $existe = Sql::ComprobarSiExisteRegistro($idAuto);
   
     if(is_numeric($idAuto) && $existe)
     {
-    	ModificarRegistro($parametros['patente'],$parametros['color'],$parametros['marca'],$idAuto);
+    	Sql::ModificarRegistro($parametros['patente'],$parametros['color'],$parametros['marca'],$idAuto);
     	$resp = true;
     	$status = 200;
     }
@@ -103,4 +95,3 @@ $app->put('/vehiculos/{id}',function($request,$response)
 });
 
 
- ?>
