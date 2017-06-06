@@ -11,14 +11,15 @@
 <body>
    <?php
     require_once "../partes/barraMenu.php" ;
-    require_once "../clases/consultasSql.php";
+    require_once "../clases/AccesoDatos.php" ;
+    require_once "../clases/Automovil.php";
     
     $idAuto = $_GET['id'];
-    $autoAmodificar = Automovil::TraerRegistro($idAuto);
+    $autoAmodificar = Automovil::Traer($idAuto);
    ?> 
   
         <div class="container col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-        <form class="form-login" onsubmit="Modificar();return false">
+        <form class="form-login" onsubmit="Modificar(<?php $autoAmodificar->GetIdCliente();?>);return false">
             <br><br>
             <h2 class="form-ingreso-heading">Modificar Vehiculo :</h2><br>
             <div class=form-group>
@@ -28,6 +29,8 @@
                 <input type="text" id="color" title="Se necesita el color" class="form-control" placeholder="Color" value="<?php echo $autoAmodificar->GetColor(); ?>" required="" autofocus="">
                 <label for="marca" class="sr-only">Marca</label>
                 <input type="text" id="marca" title="Se necesita la marca" class="form-control" placeholder="Marca" value="<?php echo $autoAmodificar->GetMarca(); ?>" required="" autofocus="">
+                <label for="idCliente" class="sr-only">Id Cliente</label>
+                <input type="text" id="idCliente" title="Se necesita la el id" class="form-control" placeholder="IdCliente" value="<?php echo $autoAmodificar->GetIdCliente(); ?>" required="" autofocus="">
             </div>
             <button class="btn btn-lg btn-success btn-block" type="submit">Registrar</button>
             <div class=form-group id="informe2">

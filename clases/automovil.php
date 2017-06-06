@@ -1,5 +1,4 @@
 <?php
-require_once "AccesoDatos.php";
 
 class Automovil 
 {
@@ -7,6 +6,7 @@ class Automovil
 	public $patente;
  	public $color;
   	public $marca;
+  	public $id_cliente;
 
   	public function GetId()
 	{
@@ -24,6 +24,10 @@ class Automovil
 	{
 		return $this->marca;
 	}
+	public function GetIdCliente()
+	{
+		return $this->id_cliente;
+	}
 	public function SetId($valor)
 	{
 		$this->id_automovil = $valor;
@@ -40,17 +44,9 @@ class Automovil
 	{
 		$this->marca = $valor;
 	}
-	
-	function __construct($id=NULL)
+	public function SetIdCliente($valor)
 	{
-		if($id != NULL){
-			$obj = Automovil::TraerUnAutomovil($id);
-			
-			$this->patente = $obj->patente;
-			$this->color = $obj->color;
-			$this->marca = $obj->$marca;
-			$this->id_automovil = $obj->id;
-		}
+		$this->id_cliente = $valor;
 	}
 
 	public function ToString()
@@ -58,7 +54,7 @@ class Automovil
 	  	return $this->patente."-".$this->color."-".$this->marca;
 	}
 
-	public static function TraerRegistros()
+	public static function TraerTodos()
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    
@@ -69,17 +65,19 @@ class Automovil
 	   
 	}
 
-	public function InsertarRegistro($patente, $color,$marca)
+	public function Insertar($patente, $color,$marca,$id_cliente)
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso();
-	    $consulta = $objetoAcceso->RetornarConsulta("insert into automovil (patente,color,marca) values(:patente,:color,:marca)");
+	    $consulta = $objetoAcceso->RetornarConsulta("insert into automovil
+	     (patente,color,marca,id_cliente) values(:patente,:color,:marca,:id_cliente)");
 	    $consulta->bindParam(":patente",$patente);
 	    $consulta->bindParam(":color",$color);
 	    $consulta->bindParam(":marca",$marca);
+	    $consulta->bindParam(":id_cliente",$id_cliente);
 	    return $consulta->execute();
 	}
 
-	public function EliminarRegistro($id)
+	public function Eliminar($id)
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    $consulta = $objetoAcceso->RetornarConsulta("delete from automovil where id_automovil = :id");
@@ -87,7 +85,7 @@ class Automovil
 	    return $consulta->execute();
 	}
 
-	public function ComprobarSiExisteRegistro($id)
+	public function ComprobarSiExiste($id)
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    $consulta = $objetoAcceso->RetornarConsulta("select count(id_automovil) from automovil where id_automovil = :id");
@@ -100,7 +98,7 @@ class Automovil
 	        return false;
 	}
 
-	public function TraerRegistro($id) 
+	public function Traer($id) 
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    $consulta = $objetoAcceso->RetornarConsulta('select * from automovil where id_automovil = '.$id.'');   
@@ -109,19 +107,21 @@ class Automovil
 	    return $autoBuscado;    
 	}
 
-	public function ModificarRegistro($patente,$color,$marca,$id)
+	public function Modificar($patente,$color,$marca,$id_cliente,$id)
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    $consulta = $objetoAcceso->RetornarConsulta("
 	                update automovil
 	                set patente=:patente,
 	                color=:color,
-	                marca=:marca
+	                marca=:marca,
+	                id_cliente =:id_cliente
 	                WHERE id_automovil=:id");
 	    $consulta->bindParam(":patente",$patente);
 	    $consulta->bindParam(":color",$color);
 	    $consulta->bindParam(":marca",$marca);
 	    $consulta->bindParam(":id",$id);
+	    $consulta->bindParam(":id_cliente",$id_cliente);
 	    return $consulta->execute();
 	}
 
@@ -135,4 +135,3 @@ class Automovil
 	}*/
 }
 
-?>

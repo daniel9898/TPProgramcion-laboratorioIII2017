@@ -10,31 +10,29 @@
 <body>
 	<?php
 	require_once('../partes/barraMenu.php');
-	require_once('../clases/consultasSql.php');
+	require_once("../clases/AccesoDatos.php");
+	require_once("../clases/registroFinal.php");
 
-	$ArrayDeVehiculos = Automovil::TraerRegistros(); 
-	
+	$vehiculos = RegistroFinal::TraerRegistrosActivos(); 
+	//LA TABLA DE REGISTRO_FINAL TIENE TODOS ESTOS DATOS
 	echo "<br><br><br><table class='table table-hover table-responsive'>
 			<thead>
 				<tr>
-					<th>  Patente   </th>				
-					<th>  Color     </th>
-					<th>  Marca   </th>
-					<th>  ELIMINAR  </th>
-					<th>  MODIFICAR  </th>
+					<th>  Apellido   </th>				
+					<th>  Patente     </th>
+					<th>  Hora De Ingreso  </th>
+					<th>  FACTURACIÓN  </th>
 				</tr> 
 			</thead>";   	
 
-		foreach ($ArrayDeVehiculos as $automovil){
+		foreach ($vehiculos as $automovil){
 
 			echo " 	<tr>
 						<td>".$automovil->GetPatente()."</td>
 						<td>".$automovil->GetColor()."</td>
 						<td>".$automovil->GetMarca()."</td>
 						<td><button class='btn btn-warning' name='eliminar' 
-						onclick='confirmarEliminacion(".$automovil->GetId().")'><span class='glyphicon glyphicon-remove'>&nbsp;</span>Eliminar</button></td>
-						<td><button class='btn btn-warning' name='Modificar' 
-						onclick='mostrarElDato(".$automovil->GetId().")'><span class='glyphicon glyphicon-edit'>&nbsp;</span>Modificar</button></td>
+						onclick='confirmarEliminacion(".$automovil->GetId().")'><span class='glyphicon glyphicon-usd'>&nbsp;</span>Sacar y Cobrar</button></td>
 					</tr>";
 		}	
 	echo "</table>";		

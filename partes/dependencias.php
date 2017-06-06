@@ -7,3 +7,6 @@
     <link rel="stylesheet" href="../estilos/estilo.css">
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../js/vehiculos.js"></script>
+    <script src="../js/cliente.js"></script>
+    <script src="../js/login.js"></script>
+    
