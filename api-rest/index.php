@@ -7,6 +7,8 @@ require "vendor/autoload.php";
 $settings = require "configs.php";
 $app = new \Slim\App($settings);
 
+date_default_timezone_set('America/Argentina/Buenos_Aires');
+
 require_once "../clases/AccesoDatos.php";
 
 require "../clases/cliente.php";

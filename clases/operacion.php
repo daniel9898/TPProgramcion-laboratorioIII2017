@@ -24,7 +24,6 @@ class Operacion
 	    $consulta->bindParam(":valor",$idEmpleadoSalida);
 	    $consulta->bindParam(":id",$idOperacion);
 	    return $consulta->execute();
-
     }
 
     public static function TraerUltimoIdAgregado()

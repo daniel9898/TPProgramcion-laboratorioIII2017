@@ -32,6 +32,6 @@ $app->post('/bajaOperacion/{id}',function($request,$response)
     $parsedBody = $response->getBody();
     $parsedBody->write($response->withHeader("Content-type", "application/json"));  
     $parsedBody->write($response->withStatus($status));
-    $parsedBody->write(json_encode(array("respuesta"=>$resp))); 
+    $parsedBody->write(json_encode(array("respuesta"=>$resp,"idOperacion"=>$id))); 
 
 });

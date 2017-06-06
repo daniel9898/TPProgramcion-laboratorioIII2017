@@ -9,30 +9,31 @@
 </head>
 <body>
 	<?php
-	require_once('../partes/barraMenu.php');
+	//require_once('../partes/barraMenu.php');
 	require_once("../clases/AccesoDatos.php");
 	require_once("../clases/registroFinal.php");
 
-	$vehiculos = RegistroFinal::TraerRegistrosActivos(); 
-	//LA TABLA DE REGISTRO_FINAL TIENE TODOS ESTOS DATOS
+	$registros = RegistroFinal::TraerRegistrosActivos();
+	print_r($registros);
+     
 	echo "<br><br><br><table class='table table-hover table-responsive'>
 			<thead>
 				<tr>
 					<th>  Apellido   </th>				
 					<th>  Patente     </th>
-					<th>  Hora De Ingreso  </th>
+					<th>  Fecha De Ingreso  </th>
 					<th>  FACTURACIÓN  </th>
 				</tr> 
 			</thead>";   	
 
-		foreach ($vehiculos as $automovil){
+		for($i=0; $i<count($registros); $i++){
 
 			echo " 	<tr>
-						<td>".$automovil->GetPatente()."</td>
-						<td>".$automovil->GetColor()."</td>
-						<td>".$automovil->GetMarca()."</td>
+						<td>".$registros[$i][0]."</td>
+						<td>".$registros[$i][1]."</td>
+						<td>".$registros[$i][2]."</td>
 						<td><button class='btn btn-warning' name='eliminar' 
-						onclick='confirmarEliminacion(".$automovil->GetId().")'><span class='glyphicon glyphicon-usd'>&nbsp;</span>Sacar y Cobrar</button></td>
+						onclick='Facturar(".$registros[$i][3].",".$registros[$i][4].",".$registros[$i][5].")'><span class='glyphicon glyphicon-usd'>&nbsp;</span>Sacar y Cobrar</button></td>
 					</tr>";
 		}	
 	echo "</table>";		

@@ -111,3 +111,54 @@ function GrabarRegistroFinal(idCliente,idOperacion,horaAlta)
             $("#informe2").html("Error,No se pudo guardar el registro."); 
       }
 }
+
+function Facturar(idRegistro,idOperacion,idLugar)
+{
+  var idEmpLogeado = localStorage.getItem("idEmpleadoLog");
+  dato={ "idEmpleadoSalida": idEmpLogeado };
+      
+  //console.log(idOperacion);
+  //console.log(idRegistro);
+  //console.log(dato);
+
+  jQuery.post(urlApi +'bajaOperacion/'+ idOperacion,dato,procesarRespuesta);
+  
+    function procesarRespuesta(res)
+    {
+        var obj = ObtenerRespuestaEnFormatoJson(res); 
+        console.log(obj.idOperacion);
+        if(obj.respuesta)
+        {
+           jQuery.post(urlApi +'estacionamiento/'+ idLugar,procesarRespuesta);
+
+           function procesarRespuesta(res)
+           {
+             //console.log(res);
+             var obj = ObtenerRespuestaEnFormatoJson(res);
+             //console.log(obj.idLugar);
+             //if(obj.idlugar != false)
+             //CalcularMonto(idRegistro); 
+           }
+        }
+    }
+}
+
+function CalcularMonto(idRegistro)
+{
+    var horaAlta = localStorage.getItem("horaAlta");
+    var dato = {"horaAlta":horaAlta};
+
+    jQuery.post(urlApi +'cerrarRegistro/'+ idRegistro,dato,procesarRespuesta);
+    function procesarRespuesta(res)
+    {
+        var obj = ObtenerRespuestaEnFormatoJson(res); 
+        if(obj.respuesta)
+
+    }
+}
+
+
+
+
+
+

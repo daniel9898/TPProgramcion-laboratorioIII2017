@@ -15,6 +15,6 @@ $app->post('/clientes',function($request,$response)
     $parsedBody = $response->getBody();
     $parsedBody->write($response->withHeader("Content-type", "application/json"));  
     $parsedBody->write($response->withStatus($status));
-    $parsedBody->write(json_encode(array("respuesta"=>$resp,"idCliente"=>$id,"fecha"=>$horaAlta))); 
+    $parsedBody->write(json_encode(array("respuesta"=>$resp,"idCliente"=>$id,"fecha"=>$horaAlta)));
 
 });
