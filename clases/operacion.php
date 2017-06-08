@@ -17,7 +17,7 @@ class Operacion
 	    return $consulta->execute();
 	}
     
-    public static function Cerrar($idOperacion,$idEmpleadoSalida)
+    public static function SetearEmpleadoSalida($idOperacion,$idEmpleadoSalida)
     {
     	$objetoAcceso = AccesoDatos::DameUnObjetoAcceso();
 	    $consulta = $objetoAcceso->RetornarConsulta('update operaciones set id_empleadoSalida = :valor where id_operacion = :id');

@@ -7,7 +7,6 @@ function tomarDatoslogin()
         "usuario": usuario,
         "contraseña": clave
     };
-
     return datos;
 }
 
@@ -18,16 +17,12 @@ function verificarUsuario()
     $.post(urlApi + "abrirSesion", tomarDatoslogin(), procesarRespuesta);
 
     function procesarRespuesta(retorno) {
-        console.log(retorno);
-
-         var obj = ObtenerRespuestaEnFormatoJson(retorno);
-         console.log(obj);
-
-         if(obj.respuesta)
+    
+         if(retorno.respuesta)
          {
-            localStorage.setItem("idEmpleadoLog",obj.idEmpleado);
+            localStorage.setItem("idEmpleadoLog",retorno.idEmpleado);
 
-            if(obj.idEmpleado == 3)
+            if(retorno.idEmpleado == 3)
                window.location.replace("logica-administrador/administrador.html");
             else
                window.location.replace("logica-empleados/empleado.php");
@@ -45,8 +40,7 @@ function DeslogearUsuario()
 
     function procesarRespuesta(retorno)
     {
-        var obj = ObtenerRespuestaEnFormatoJson(retorno);
-        if(obj.respuesta)
+        if(retorno.respuesta)
             window.location.replace("../index.html");
     }
 }

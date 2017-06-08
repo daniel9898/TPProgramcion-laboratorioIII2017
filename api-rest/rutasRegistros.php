@@ -11,10 +11,7 @@
     if(!$resp || !isset($id))
       $status = 500;
 
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    $parsedBody->write($response->withStatus($status));
-    $parsedBody->write(json_encode(array("respuesta"=>$resp,"idRegistro"=>$id))); 
+     return $response->withJson(array("respuesta"=>$resp,"idRegistro"=>$id),$status); 
 
 });
 
@@ -22,18 +19,17 @@ $app->post('/cerrarRegistro/{id}',function($request,$response)
 {
     $idRegistro = $request->getAttribute('id');
     $horaIngreso = $request->getParam('horaAlta');
-    $horaEgreso = date('Y-m-d H-i-s');
-    $dif = RegistroFinal::CalcularMonto($horaIngreso,$horaEgreso);
-    echo $dif/3600;
-    //$resp = RegistroFinal::Cerrar($idRegistro,$horaEgreso,$importe);
+    //var_dump($horaIngreso);
+    $horaEgreso = date('H:i:s d-m-Y');
+    //var_dump($horaEgreso);
+    $importe = RegistroFinal::CalcularMonto($horaIngreso,$horaEgreso);
+    //var_dump($importe);
+    $resp = RegistroFinal::SetearImporteYfechaDeSalida($idRegistro,$horaEgreso,$importe);
         
-    //$status = 200; 
-    //if(!$resp || !isset($importe))
-    //  $status = 500;
-
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    //$parsedBody->write($response->withStatus($status));
-    //$parsedBody->write(json_encode(array("respuesta"=>$resp,"importe"=>$importe))); 
+    $status = 200; 
+    if(!$resp || !isset($importe))
+       $status = 500;
+    
+    return $response->withJson(array("respuesta"=>$resp,"importe"=>$importe),$status);
 
 });

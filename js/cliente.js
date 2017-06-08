@@ -31,40 +31,51 @@ function ObtenerlugarVacio(esDiscap)
 {
    jQuery.get(urlApi +'estacionamiento/'+ esDiscap ,procesarRespuesta);
 
-    function procesarRespuesta(res)
+    function procesarRespuesta(resp)
     {
-        var obj1 = ObtenerRespuestaEnFormatoJson(res);
-        //console.log(obj1.idLugar);
-          if(obj1.idLugar != false)//devuelve false o el id del lugar
+          if(resp.idLugar != false)//devuelve false o el id del lugar
             {
               jQuery.post(urlApi +'clientes',TomarDatosCliente(),procesar);
 
-                function procesar(res)
+                function procesar(resp2)
                 {
-                    var obj2 = ObtenerRespuestaEnFormatoJson(res);
-                    //console.log(obj2); 
- 
-                    if(obj2.respuesta)
+                    if(resp2.respuesta)
                     {
-                        localStorage.setItem("horaAlta",obj2.fecha);
-                        var ok = InsertarVehiculo(obj2.idCliente,obj1.idLugar); 
+                        localStorage.setItem("horaAlta",resp2.fecha);
+                        var ok = InsertarVehiculo(resp2.idCliente,resp.idLugar); 
                     }
                 }
             }
             else
-            $("#informe2").html("No hay lugares disponibles.");  
+            $("#informe2").html("No hay lugares disponibles.");
     }
 }
 
-function ObtenerRespuestaEnFormatoJson(resp)
+function TomarDatosVehiculo(id)
 {
-	var lista = resp == null ? [] : (resp instanceof Array ? resp : [resp]);
+  datos ={
 
-  lista2 = lista[0].split('{');
-  var respJson = '{'+lista2[1];
+    "patente": $("#patente").val(),
+    "color": $("#color").val(),
+    "marca": $("#marca").val(),
+    "idCliente":id
+  };
+  return datos;
+}
 
-  var obj = JSON.parse(respJson);
-  return obj;	
+function InsertarVehiculo(idCliente,idLugar)
+{
+  var resp = false;
+  var datos = TomarDatosVehiculo(idCliente);
+  var idEmpLogeado = localStorage.getItem("idEmpleadoLog");
+
+  jQuery.post(urlApi +'vehiculos',datos,procesarRespuesta);
+
+    function procesarRespuesta(res)
+    {
+      if(res)
+         var operacion = CrearOperacion(idCliente,idEmpLogeado,idLugar);  
+    }
 }
 
 function CrearOperacion(idCliente,idEmpEnt,idLugar)//idcliente y automovil es el mismo
@@ -75,19 +86,16 @@ function CrearOperacion(idCliente,idEmpEnt,idLugar)//idcliente y automovil es el
     'idLugar':idLugar,
     'idEmpleadoAlta':idEmpEnt
   };
-  //console.log(datos);
 
   jQuery.post(urlApi +'altaOperacion',datos,procesarRespuesta);
 
       function procesarRespuesta(res)
       {
-          var obj = ObtenerRespuestaEnFormatoJson(res); 
-          if(obj.respuesta)
+          if(res.respuesta)
           {
             var horaAlta = localStorage.getItem("horaAlta");
-            GrabarRegistroFinal(idCliente,obj.idOperacion,horaAlta);
+            GrabarRegistroFinal(idCliente,res.idOperacion,horaAlta);
           }
-      
       }
 }
 
@@ -99,16 +107,15 @@ function GrabarRegistroFinal(idCliente,idOperacion,horaAlta)
     "idOperacion": idOperacion,
     "horaAlta": horaAlta
   }
-  //console.log(datos);
+  
 	jQuery.post(urlApi +'abrirRegistro',datos,procesarRespuesta);
 
       function procesarRespuesta(res)
       {
-          var obj = ObtenerRespuestaEnFormatoJson(res); 
-          if(obj.respuesta)
+          if(res.respuesta)
             $("#informe2").html("Registro Exitoso."); 
           else 
-            $("#informe2").html("Error,No se pudo guardar el registro."); 
+            $("#informe2").html("Error,No se pudo guardar el registro.");
       }
 }
 
@@ -117,27 +124,17 @@ function Facturar(idRegistro,idOperacion,idLugar)
   var idEmpLogeado = localStorage.getItem("idEmpleadoLog");
   dato={ "idEmpleadoSalida": idEmpLogeado };
       
-  //console.log(idOperacion);
-  //console.log(idRegistro);
-  //console.log(dato);
-
   jQuery.post(urlApi +'bajaOperacion/'+ idOperacion,dato,procesarRespuesta);
   
     function procesarRespuesta(res)
     {
-        var obj = ObtenerRespuestaEnFormatoJson(res); 
-        console.log(obj.idOperacion);
-        if(obj.respuesta)
+        if(res.respuesta)
         {
            jQuery.post(urlApi +'estacionamiento/'+ idLugar,procesarRespuesta);
 
-           function procesarRespuesta(res)
+           function procesarRespuesta(resp)
            {
-             //console.log(res);
-             var obj = ObtenerRespuestaEnFormatoJson(res);
-             //console.log(obj.idLugar);
-             //if(obj.idlugar != false)
-             //CalcularMonto(idRegistro); 
+             CalcularMonto(idRegistro);
            }
         }
     }
@@ -148,11 +145,15 @@ function CalcularMonto(idRegistro)
     var horaAlta = localStorage.getItem("horaAlta");
     var dato = {"horaAlta":horaAlta};
 
+    console.log(idRegistro);
+   // console.log(horaAlta);
+
     jQuery.post(urlApi +'cerrarRegistro/'+ idRegistro,dato,procesarRespuesta);
     function procesarRespuesta(res)
     {
-        var obj = ObtenerRespuestaEnFormatoJson(res); 
-        if(obj.respuesta)
+      //console.log(res);
+      if(res.respuesta)
+        console.log("IMPORTE A PAGAR : $"+res.importe);
 
     }
 }

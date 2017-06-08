@@ -18,7 +18,7 @@ class RegistroFinal
 	    return $consulta->execute();
 	}
     
-    public static function Cerrar($id_registro,$horaSalida,$importe)
+    public static function SetearImporteYfechaDeSalida($id_registro,$horaSalida,$importe)
     {
     	$objetoAcceso = AccesoDatos::DameUnObjetoAcceso();
 	    $consulta = $objetoAcceso->RetornarConsulta('update registro_final set hora_salida = :valor1,
@@ -32,42 +32,30 @@ class RegistroFinal
     
     public static function CalcularMonto($fechaIngreso,$fechaEgreso)
     {
-        $horaEntrada =explode(" ",$fechaIngreso);
-        $horaSalida =explode(" ",$fechaEgreso);
-        //echo $horaSalida[1];
-		$minutos = RegistroFinal::dateDiff($horaEntrada[1],$horaSalida[1]);
+		$minutos = RegistroFinal::CalcularDiferenciaHoraria($fechaIngreso,$fechaEgreso);
+	
+        $valorMinutoNormal = 10 / 60;
+		$valorMinuto12h = 90 / 720 ;
+		$valorMinuto24h = 170 / 1440;
 
-        /*$valor12H = 90;
-        $valor24H = 170;
-		$valorHora = 10;
-		$valorMinuto = $valorHora / 60;*/
+		if($minutos >0 && $minutos<780)//780 equivale a 13 hs
+			$monto = $minutos*$valorMinutoNormal;
+		else if($minutos<1500)//1500 equivale a 13 hs
+			$monto = $minutos*$valorMinuto12h;
+		else
+			$monto = $minutos*$valorMinuto24h;
 
-		return $minutos;
-
-		/*if()
-		{
-
-		}*/
+		return round($monto);
 
     }
 
-    public static function dateDiff($start,$end)
+    public static function CalcularDiferenciaHoraria($start,$end)
     {
 		$start_ts = strtotime($start);
 		$end_ts = strtotime($end);
 
 		$diff = $end_ts - $start_ts;
-
-		return round($diff / 60);
-		/*$date = new DateTime(); 
-
-        $date2 = new DateTime($start); 
-         
-        $date->setTimeZone( new DateTimeZone('America/Buenos_Aires') ); 
-
-        $interval = $date->diff( $date2 ); 
-
-        echo $interval->format('%h%');*/ 
+		return floor($diff / 60);
     }
 
     public static function TraerRegistrosActivos()
@@ -82,8 +70,6 @@ class RegistroFinal
 	    $registros = $consulta->fetchAll();
 	    return $registros;
     }
-
-
 
     public static function TraerUltimoIdAgregado()
 	{

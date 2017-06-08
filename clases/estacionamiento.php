@@ -6,7 +6,7 @@ class Estacionamiento
 	{
        	$objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    
-	    $consulta = $objetoAcceso->RetornarConsulta("select * from lugares");
+	    $consulta = $objetoAcceso->RetornarConsulta("select id_lugar,discapacitados from lugares where disponibilidad = 'vacio'");
 	    $consulta->execute();
 	    $lugares = $consulta->fetchAll();
 	    return $lugares;
@@ -14,26 +14,21 @@ class Estacionamiento
 
 	public static function ObtenerPrimerLugarVacio($lugares,$discap)
 	{
-		if($discap == "si")
+		if(count($lugares)>0)
 		{
-			foreach ($lugares as $lugar)
+			if($discap == "si")//si se agotan los lugares retornamos otro igual 
+			   		return $lugares[0]["id_lugar"];
+			else
 			{
-			   	if($lugar["disponibilidad"] == "vacio")
-			   		return $lugar["id_lugar"];
-			 
-			   	if(key($lugar) == 2)
-			   		break;
-			}
-		}
-		else
-		{
-			foreach ($lugares as $lugar)
-			{
-			   	if($lugar["disponibilidad"] == "vacio" && $lugar["discapacitados"] == "no")
-			   		return $lugar["id_lugar"];
-			}
+				foreach ($lugares as $lugar)
+				{
+				   	if($lugar["discapacitados"] == "no")
+				   		return $lugar["id_lugar"];
+				}
 
+			}
 		}
+
 		return false;
 	}
 

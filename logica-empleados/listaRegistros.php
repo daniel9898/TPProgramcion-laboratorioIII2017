@@ -9,12 +9,12 @@
 </head>
 <body>
 	<?php
-	//require_once('../partes/barraMenu.php');
+	require_once('../partes/barraMenu.php');
 	require_once("../clases/AccesoDatos.php");
 	require_once("../clases/registroFinal.php");
 
 	$registros = RegistroFinal::TraerRegistrosActivos();
-	print_r($registros);
+	//print_r($registros);
      
 	echo "<br><br><br><table class='table table-hover table-responsive'>
 			<thead>

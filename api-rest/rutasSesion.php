@@ -14,10 +14,7 @@ $app->post('/abrirSesion',function($request,$response)
     	$resp = true;
     }
 
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    $parsedBody->write($response->withStatus(200));
-    $parsedBody->write(json_encode(array("respuesta"=>$resp,"idEmpleado"=>$idEmp)));
+    return $response->withJson(array("respuesta"=>$resp,"idEmpleado"=>$idEmp),200);
 
 });
 
@@ -33,9 +30,6 @@ $app->post('/cerrarSesion/{id}',function($request,$response)
     else
        $status = 404;
     	
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    $parsedBody->write($response->withStatus($status));
-    $parsedBody->write(json_encode(array("respuesta"=>$resp)));
+    return $response->withJson(array("respuesta"=>$resp),$status);
 
 });

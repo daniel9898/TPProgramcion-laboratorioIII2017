@@ -12,10 +12,7 @@ $app->post('/altaOperacion',function($request,$response)
     if(!$resp || !isset($id))
       $status = 500;
    
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    $parsedBody->write($response->withStatus($status));
-    $parsedBody->write(json_encode(array("respuesta"=>$resp,"idOperacion"=>$id))); 
+    return $response->withJson(array("respuesta"=>$resp,"idOperacion"=>$id),$status); 
 
 });
 
@@ -23,15 +20,12 @@ $app->post('/bajaOperacion/{id}',function($request,$response)
 {
 	$id = $request->getAttribute('id');
     $idEmpSalida = $request->getParam('idEmpleadoSalida');
-    $resp = Operacion::Cerrar($id,$idEmpSalida);
+    $resp = Operacion::SetearEmpleadoSalida($id,$idEmpSalida);
   
     $status = 200; 
     if(!$resp)
       $status = 500;
    
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    $parsedBody->write($response->withStatus($status));
-    $parsedBody->write(json_encode(array("respuesta"=>$resp,"idOperacion"=>$id))); 
+    return $response->withJson(array("respuesta"=>$resp,"idOperacion"=>$id)); 
 
 });

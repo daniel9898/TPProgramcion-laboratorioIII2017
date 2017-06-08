@@ -15,9 +15,9 @@
         <form class="form-login" onsubmit="InsertarCliente();return false">
             <br><br>
             <h2>Alta De Clientes :</h2>
-            <h4>-Antes de insertar un cliente verifique si este ya se encuentra registrado.</h4><br>
+            <h4>-Verifique La lista de clientes antes de registrar uno.</h4><br>
+            <button class="btn btn-lg btn-success btn-block form-group" type="submit">Clientes Registrados</button><br>
             <div class=form-group>
-                <input type="checkbox" id="discap"> Discapacitado<br><br>
                 <label for="nombre" class="sr-only">Nombre</label>
                 <input type="text" id="nombre" title="Se necesita el nombre" class="form-control" placeholder="Nombre" required="" autofocus="">
                 <label for="apellido" class="sr-only">Apellido</label>
@@ -30,9 +30,9 @@
                 <input type="text" id="color" title="Se necesita el color" class="form-control" placeholder="Color" required="" autofocus="">
                 <label for="marca" class="sr-only">Marca</label>
                 <input type="text" id="marca" title="Se necesita la marca" class="form-control" placeholder="Marca" required="" autofocus="">
+                <input type="checkbox" id="discap"> Discapacitado<br><br>
             </div>
             <button class="btn btn-lg btn-success btn-block" type="submit">Registrar</button>
-            <button class="btn btn-lg btn-success btn-block" type="submit">Clientes Registrados</button>
             <br>
             <div class=form-group id="informe2">
 

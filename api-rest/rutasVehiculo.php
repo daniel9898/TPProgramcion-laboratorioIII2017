@@ -10,11 +10,8 @@ $app->get('/vehiculos',function($request,$response)
         $array[$i] = (array)$valor;
         $i++;
     }
-    
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    $parsedBody->write($response->withStatus(200));
-    $parsedBody->write(json_encode($array));
+
+    return $response->withJson($array);
 
 });
 
@@ -33,11 +30,7 @@ $app->get('/vehiculos/{id}',function($request,$response)
 	    }
     }
     
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    $parsedBody->write($response->withStatus($status));
-    $parsedBody->write(json_encode($autoBuscado)); 
-
+    return $response->withJson($autoBuscado,$status); 
 });
 
 $app->post('/vehiculos',function($request,$response) 
@@ -52,10 +45,7 @@ $app->post('/vehiculos',function($request,$response)
     else
         $status = 404;
     
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    $parsedBody->write($response->withStatus($status));
-    $parsedBody->write(json_encode(array("respuesta"=>$resp))); 
+    return $response->withJson(array("respuesta"=>$resp),$status); 
 
 });
 
@@ -73,10 +63,7 @@ $app->get('/vehiculosBaja/{id}',function($request,$response)
     	$status = 200;
     }
     	
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    $parsedBody->write($response->withStatus($status));
-    $parsedBody->write(json_encode(array('respuesta'=>$resp))); 
+    return $response->withJson(array('respuesta'=>$resp),$status); 
 
 });
 
@@ -99,10 +86,7 @@ $app->get('/vehiculosMod/{id}',function($request,$response)
     	$status = 200;
     }
     	
-    $parsedBody = $response->getBody();
-    $parsedBody->write($response->withHeader("Content-type", "application/json"));  
-    $parsedBody->write($response->withStatus($status));
-    $parsedBody->write(json_encode(array('respuesta'=>$resp))); 
+    return $response->withJson(array('respuesta'=>$resp),$status); 
 
 });
 
