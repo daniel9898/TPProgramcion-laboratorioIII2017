@@ -33,7 +33,7 @@ function ObtenerlugarVacio(esDiscap)
 
     function procesarRespuesta(resp)
     {
-          if(resp.idLugar != false)//devuelve false o el id del lugar
+          if(resp.idLugar != null)
             {
               jQuery.post(urlApi +'clientes',TomarDatosCliente(),procesar);
 
@@ -74,7 +74,7 @@ function InsertarVehiculo(idCliente,idLugar)
     function procesarRespuesta(res)
     {
       if(res)
-         var operacion = CrearOperacion(idCliente,idEmpLogeado,idLugar);  
+        CrearOperacion(idCliente,idEmpLogeado,idLugar);  
     }
 }
 

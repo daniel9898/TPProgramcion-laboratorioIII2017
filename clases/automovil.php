@@ -125,13 +125,5 @@ class Automovil
 	    return $consulta->execute();
 	}
 
-	/*public function ModificarRegistro($campoAmodificar,$valor,$id)
-	{
-	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
-	    $consulta = $objetoAcceso->RetornarConsulta('update automovil set '.$campoAmodificar.' = :valor where id_automovil = :id');
-	    $consulta->bindParam(":valor",$valor);
-	    $consulta->bindParam(":id",$id);
-	    return $consulta->execute();
-	}*/
 }
 

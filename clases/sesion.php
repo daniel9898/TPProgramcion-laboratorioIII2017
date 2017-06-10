@@ -2,14 +2,15 @@
 
 class Sesion
 {
-	public static function ObtenerDatosLogin()
+	public static function ValidarLogin($parametros)
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso();
-	    $consulta = $objetoAcceso->RetornarConsulta("Select id_empleado,usuario,contraseña
-	     from empleados");
+	    $consulta = $objetoAcceso->RetornarConsulta("Select id_empleado from empleados where usuario = :valor1 and contraseña = :valor2");
+	    $consulta->bindParam(":valor1",$parametros['usuario']);
+	    $consulta->bindParam(":valor2",$parametros['contraseña']);
 	    $consulta->execute();
-	    $datos = $consulta->fetchAll();  
-	    return $datos;
+	    $id = $consulta->fetch(PDO::FETCH_ASSOC);  
+	    return $id;
 	}
     
     public static function CambiarEstadoLogin($idEmp,$valor)
@@ -21,18 +22,5 @@ class Sesion
 	    return $consulta->execute();
 
     }
-
-    public static function VerificarLogin($usuariosContraseñas,$datosIngresados)
-	{
-	    foreach ($usuariosContraseñas as $valor)
-	    {
-	        if($valor[1] == $datosIngresados['usuario']  && $valor[2]== $datosIngresados['contraseña'])
-	        {
-	        	return $valor[0];
-	        }
-	    }
-	    return false;
-	   
-	}
 	
 }

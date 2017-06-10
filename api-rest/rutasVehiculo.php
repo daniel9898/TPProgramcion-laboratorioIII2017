@@ -12,7 +12,6 @@ $app->get('/vehiculos',function($request,$response)
     }
 
     return $response->withJson($array);
-
 });
 
 $app->get('/vehiculos/{id}',function($request,$response)
@@ -25,9 +24,7 @@ $app->get('/vehiculos/{id}',function($request,$response)
     {
         $autoBuscado = Automovil::Traer($idAuto); 
 	    if(!empty($autoBuscado))
-	    {
-	      $status = 200;
-	    }
+	       $status = 200;
     }
     
     return $response->withJson($autoBuscado,$status); 
@@ -46,7 +43,6 @@ $app->post('/vehiculos',function($request,$response)
         $status = 404;
     
     return $response->withJson(array("respuesta"=>$resp),$status); 
-
 });
 
 $app->get('/vehiculosBaja/{id}',function($request,$response) 
@@ -62,9 +58,8 @@ $app->get('/vehiculosBaja/{id}',function($request,$response)
     	$resp = true;
     	$status = 200;
     }
-    	
-    return $response->withJson(array('respuesta'=>$resp),$status); 
 
+    return $response->withJson(array('respuesta'=>$resp),$status);
 });
 
 $app->get('/vehiculosMod/{id}',function($request,$response) 
@@ -73,9 +68,7 @@ $app->get('/vehiculosMod/{id}',function($request,$response)
     $parametros = $request->getParams('patente','color','marca','idCliente');
    	$status = 404;
    	$resp = false;
-    var_dump($idAuto);
     $existeAuto = Automovil::ComprobarSiExiste($idAuto);
-    var_dump($parametros['idCliente']);
     $existeCliente = Cliente::ComprobarSiExiste($parametros['idCliente']);
     
     if(is_numeric($idAuto) && $existeAuto && $existeCliente)
@@ -85,9 +78,8 @@ $app->get('/vehiculosMod/{id}',function($request,$response)
     	$resp = true;
     	$status = 200;
     }
-    	
+    
     return $response->withJson(array('respuesta'=>$resp),$status); 
-
 });
 
 

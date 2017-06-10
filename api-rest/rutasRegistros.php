@@ -19,11 +19,8 @@ $app->post('/cerrarRegistro/{id}',function($request,$response)
 {
     $idRegistro = $request->getAttribute('id');
     $horaIngreso = $request->getParam('horaAlta');
-    //var_dump($horaIngreso);
     $horaEgreso = date('H:i:s d-m-Y');
-    //var_dump($horaEgreso);
     $importe = RegistroFinal::CalcularMonto($horaIngreso,$horaEgreso);
-    //var_dump($importe);
     $resp = RegistroFinal::SetearImporteYfechaDeSalida($idRegistro,$horaEgreso,$importe);
         
     $status = 200; 

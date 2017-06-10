@@ -1,50 +1,6 @@
 <?php 
 class Cliente 
 {
-	public $id_cliente;
-	public $nombre;
- 	public $apellido;
-  	public $dni;
-
-  	public function GetId()
-	{
-		return $this->id_cliente;
-	}
-	public function GetNombre()
-	{
-		return $this->nombre;
-	}
-	public function GetApellido()
-	{
-		return $this->apellido;
-	}
-	public function GetDni()
-	{
-		return $this-$dni;
-	}
-	public function SetId($valor)
-	{
-		$this->id_cliente = $valor;
-	}
-	public function SetNombre($valor)
-	{
-		$this->nombre = $valor;
-	}
-	public function SetApellido($valor)
-	{
-		$this->apellido = $valor;
-	}
-	public function SetDni($valor)
-	{
-		$this-$dni = $valor;
-	}
-	
-	public function ToString()
-	{
-	  	return $this->nombre."-".$this->apellido."-".$this-$dni;
-	}
-
-
 	public static function TraerUltimoIdAgregado()
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
