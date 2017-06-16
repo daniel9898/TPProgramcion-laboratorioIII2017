@@ -3,7 +3,7 @@
 $app->post('/abrirSesion',function($request,$response)
 {
 	$resp=false;
-	$parametros = $request->getParams('usuario','contraseña');
+	$parametros = $request->getParams('usuario','clave');
     $id = Sesion::ValidarLogin($parametros); 
     
     if($id["id_empleado"] != false)

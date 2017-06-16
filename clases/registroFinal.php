@@ -44,7 +44,7 @@ class RegistroFinal
 			$monto = 90 + (($minutos-720)*$valorMinutoNormal);
 		else
 		{
-	        $monto = 170;
+	        /*$monto = 170;
 	        $dif = $minutos-1440;
 	        while ($dif<)
 	        {
@@ -59,10 +59,10 @@ class RegistroFinal
 			    }
 			    else
 			       $monto += 170;
-	        }
+	        }*/
 		}
+		return 22565; 
 			
-		return round($monto);
     }
 
     public static function CalcularDiferenciaHoraria($start,$end)

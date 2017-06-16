@@ -7,7 +7,7 @@ class Sesion
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso();
 	    $consulta = $objetoAcceso->RetornarConsulta("Select id_empleado from empleados where usuario = :valor1 and contraseña = :valor2");
 	    $consulta->bindParam(":valor1",$parametros['usuario']);
-	    $consulta->bindParam(":valor2",$parametros['contraseña']);
+	    $consulta->bindParam(":valor2",$parametros['clave']);
 	    $consulta->execute();
 	    $id = $consulta->fetch(PDO::FETCH_ASSOC);  
 	    return $id;

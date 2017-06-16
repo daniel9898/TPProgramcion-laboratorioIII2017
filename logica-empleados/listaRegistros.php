@@ -33,7 +33,7 @@
 						<td>".$registros[$i][1]."</td>
 						<td>".$registros[$i][2]."</td>
 						<td><button class='btn btn-warning' name='eliminar' 
-						onclick='Facturar(".$registros[$i][3].",".$registros[$i][4].",".$registros[$i][5].")'><span class='glyphicon glyphicon-usd'>&nbsp;</span>Sacar y Cobrar</button></td>
+						onclick='Listado.SacarVehiculo(".$registros[$i][3].",".$registros[$i][4].",".$registros[$i][5].")'><span class='glyphicon glyphicon-usd'>&nbsp;</span>Sacar y Cobrar</button></td>
 					</tr>";
 		}	
 	echo "</table>";		
