@@ -24,7 +24,7 @@ var Log = (function () {
             if (retorno.idEmpleado == 3)
                 window.location.replace("logica-administrador/administrador.html");
             else
-                window.location.replace("logica-empleados/empleado.php");
+                window.location.replace("logica-empleados/formularioAlta.php");
         }
         else
             $("#informe").html("Usuario o contraseña incorrecta.");

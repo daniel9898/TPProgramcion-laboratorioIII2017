@@ -35,4 +35,29 @@ class Cliente
          $("#informe2").html("No hay lugares disponibles.");
     }
 
+    public TraerVehiculos(idCliente)
+    {
+       $(".n").html("");
+       jQuery.get(this.urlApi +'traerVehiculos/'+ idCliente,this.MostrarVehic);
+    }
+
+    private MostrarVehic(respCallback):any 
+    {
+      if(respCallback.respuesta)
+      {
+          var cantidad = respCallback.respuesta.length;
+          for(var i=0; i<cantidad; i++)
+          {
+            $("#filas").before(
+                "<tr class='n'>"+
+                    "<td>&nbsp;&nbsp;"+respCallback.respuesta[i].color+"</td>"+
+                    "<td>&nbsp;&nbsp;"+respCallback.respuesta[i].marca+"</td>"+
+                    "<td>&nbsp;&nbsp;"+respCallback.respuesta[i].patente+"</td>"+
+                    "<td><a class='btn btn-sm btn-success btn-block'>Estacionar</a></td>"+    
+                "</tr>");
+          }
+      }
+
+    }
+
 }

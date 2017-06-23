@@ -12,10 +12,9 @@
    <?php require_once "../partes/barraMenu.php" ;?>
 
         <div class="container col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-            <br><br>
             <h2>Alta De Clientes :</h2>
-            <h4>-Verifique La lista de clientes antes de registrar uno.</h4><br>
-            <button class="btn btn-lg btn-success btn-block form-group" onclick="">Clientes Registrados</button>
+            <h4>*Verifique La lista de clientes antes de registrar uno.</h4>
+            <a class="btn btn-lg btn-success btn-block form-group" href="listaClientes.php">Clientes Registrados</a>
             <br>
         <form class="form-login" onsubmit="Main.Insertar();return false">
             <div class=form-group>

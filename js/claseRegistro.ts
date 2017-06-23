@@ -34,7 +34,11 @@ class Registro
 	private procesar(respCallback)
 	{
    	   if(respCallback.respuesta)
-           alert("IMPORTE A PAGAR : $"+respCallback.importe);
+   	   { 
+   	   	  $("#importe").html("$ "+respCallback.importe);
+          $("#myModal").modal();
+          //window.location.replace("listaRegistros.php");
+   	   }      
 	}
 
 }

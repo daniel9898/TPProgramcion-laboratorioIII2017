@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>Listado Registros</title>
 	
     <?php require_once"../partes/dependencias.php"; ?>
 
@@ -15,14 +15,14 @@
 
 	$registros = RegistroFinal::TraerRegistrosActivos();
 	//print_r($registros);
-     
-	echo "<br><br><br><table class='table table-hover table-responsive'>
+    echo "<h3><center>- Estacionados :</center></h3>";
+	echo "<br><table class='table table-hover table-responsive'>
 			<thead>
 				<tr>
 					<th>  Apellido   </th>				
 					<th>  Patente     </th>
 					<th>  Fecha De Ingreso  </th>
-					<th>  FACTURACIÓN  </th>
+					<th>  Lugar     </th>
 				</tr> 
 			</thead>";   	
 
@@ -32,12 +32,16 @@
 						<td>".$registros[$i][0]."</td>
 						<td>".$registros[$i][1]."</td>
 						<td>".$registros[$i][2]."</td>
-						<td><button class='btn btn-warning' name='eliminar' 
-						onclick='Listado.SacarVehiculo(".$registros[$i][3].",".$registros[$i][4].",".$registros[$i][5].")'><span class='glyphicon glyphicon-usd'>&nbsp;</span>Sacar y Cobrar</button></td>
+						<td>".$registros[$i][5]."</td>
+						<td><button class='btn btn-warning' data-toggle='modal' data-target='#myModal' 
+						onclick='Listado.SacarVehiculo(".$registros[$i][3].",".$registros[$i][4].",".$registros[$i][5].")'><span class='glyphicon glyphicon-usd'>&nbsp;</span>Facturar</button></td>
 					</tr>";
 		}	
-	echo "</table>";		
+	echo "</table>";
+
+	require "../partes/Modalimporte.php";			
 ?>
+
 </body>
 </html>
 

@@ -24,8 +24,11 @@ var Registro = (function () {
         jQuery.post(this.urlApi + 'cerrarRegistro/' + idRegistro, dato, this.procesar);
     };
     Registro.prototype.procesar = function (respCallback) {
-        if (respCallback.respuesta)
-            alert("IMPORTE A PAGAR : $" + respCallback.importe);
+        if (respCallback.respuesta) {
+            $("#importe").html("$ " + respCallback.importe);
+            $("#myModal").modal();
+            //window.location.replace("listaRegistros.php");
+        }
     };
     return Registro;
 }());

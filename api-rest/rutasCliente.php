@@ -15,3 +15,13 @@ $app->post('/clientes',function($request,$response)
     return $response->withJson(array("respuesta"=>$resp,"idCliente"=>$id,"fecha"=>$horaAlta));
 
 });
+
+$app->get('/traerVehiculos/{idCliente}',function($request,$response) 
+{
+  $id = $request->getAttribute('idCliente'); 
+  $arrayAutos = cliente::TraerVehiculos($id);
+  if($arrayAutos == null)
+    $arrayAutos = false;
+
+  return $response->withJson(array("respuesta"=>$arrayAutos));
+});

@@ -33,36 +33,12 @@ class RegistroFinal
     public static function CalcularMonto($fechaIngreso,$fechaEgreso)
     {
 		$minutos = RegistroFinal::CalcularDiferenciaHoraria($fechaIngreso,$fechaEgreso);
+        
+        $monto =  floor($minutos / 1440)*170;
+        $monto += floor($minutos % 1440)*90;
+        $monto += ((($minutos % 1440) %720)/60)*10;
 	
-        $valorMinutoNormal = 10 / 60;
-		$valorMinuto12h = 90 / 720 ;
-		$valorMinuto24h = 170 / 1440;
-
-		if($minutos > 0 && $minutos < 720)//720 equivale a 12 hs
-			$monto = $minutos*$valorMinutoNormal;
-		else if($minutos < 1440)//1440 equivale a 24 hs
-			$monto = 90 + (($minutos-720)*$valorMinutoNormal);
-		else
-		{
-	        /*$monto = 170;
-	        $dif = $minutos-1440;
-	        while ($dif<)
-	        {
-		        $dif = $minutos-1440;
-			    if($dif<720)
-			    {
-			       $monto += $dif*$valorMinutoNormal;
-			    }
-			    elseif ($dif<1440)
-			    {
-			       $monto += 90 + (($minutos-720)*$valorMinutoNormal);
-			    }
-			    else
-			       $monto += 170;
-	        }*/
-		}
-		return 22565; 
-			
+		return round($monto); 	
     }
 
     public static function CalcularDiferenciaHoraria($start,$end)

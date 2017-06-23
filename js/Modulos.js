@@ -30,4 +30,12 @@ var Listado;
     }
     Listado.SacarVehiculo = SacarVehiculo;
 })(Listado || (Listado = {}));
+var ListaClientes;
+(function (ListaClientes) {
+    var cliente = new Cliente();
+    function MostrarVehiculos(idCliente) {
+        cliente.TraerVehiculos(idCliente);
+    }
+    ListaClientes.MostrarVehiculos = MostrarVehiculos;
+})(ListaClientes || (ListaClientes = {}));
 //# sourceMappingURL=Modulos.js.map

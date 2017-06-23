@@ -35,4 +35,15 @@ module Listado // listaRegistros.php
    {
       operacion.CerrarOperacion(idRegistro,idOperacion,idLugar);
    }
+ 
+}
+
+module ListaClientes // listaClientes.php
+{
+   var cliente : Cliente = new Cliente();
+
+   export function MostrarVehiculos(idCliente)
+   {
+      cliente.TraerVehiculos(idCliente);
+   }
 }

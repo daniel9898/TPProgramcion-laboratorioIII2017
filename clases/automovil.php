@@ -49,10 +49,6 @@ class Automovil
 		$this->id_cliente = $valor;
 	}
 
-	public function ToString()
-	{
-	  	return $this->patente."-".$this->color."-".$this->marca;
-	}
 
 	public static function TraerTodos()
 	{
@@ -124,6 +120,7 @@ class Automovil
 	    $consulta->bindParam(":id_cliente",$id_cliente);
 	    return $consulta->execute();
 	}
+
 
 }
 

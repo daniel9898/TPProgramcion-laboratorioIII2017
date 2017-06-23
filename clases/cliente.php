@@ -1,6 +1,45 @@
 <?php 
 class Cliente 
 {
+	public $id_cliente;
+	public $dni;
+ 	public $nombre;
+  	public $apellido;
+
+	public function GetId()
+	{
+		return $this->id_cliente;
+	}
+	public function GetDni()
+	{
+		return $this->dni;
+	}
+	public function GetNombre()
+	{
+		return $this->nombre;
+	}
+	public function GetApellido()
+	{
+		return $this->apellido;
+	}
+	//
+	public function SetId($valor)
+	{
+		$this->id_cliente = $valor;
+	}
+	public function SetDni($valor)
+	{
+		$this->dni = $valor;
+	}
+	public function SetNombre($valor)
+	{
+		$this->nombre = $valor;
+	}
+	public function SetApellido($valor)
+	{
+		$this->apellido = $valor;
+	}
+
 	public static function TraerUltimoIdAgregado()
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
@@ -33,6 +72,27 @@ class Cliente
 	        return true;
 	    else
 	        return false;
+	}
+
+	public static function TraerTodos()
+	{
+	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
+	    
+	    $consulta = $objetoAcceso->RetornarConsulta("SELECT * from clientes");
+	    $consulta->execute();
+	    $datos = $consulta->setFetchMode(PDO::FETCH_INTO,new Cliente);
+	    return $consulta;
+	}
+
+	public static function TraerVehiculos($idCliente)
+	{
+	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
+	    
+	    $consulta = $objetoAcceso->RetornarConsulta("SELECT * from automovil where id_cliente = :id");
+	    $consulta->bindParam(":id",$idCliente);
+	    $consulta->execute();
+	    $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+	    return $datos;
 	}
 
 }
