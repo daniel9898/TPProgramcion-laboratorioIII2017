@@ -4,6 +4,7 @@
 <div class="topnav" id="myTopnav">
   <a class="animated bounceInLeft" href="formularioAlta.php"><span class="glyphicon glyphicon-list-alt">&nbsp;</span>Alta</a>
   <a class="animated bounceInLeft" href="listaRegistros.php"><span class="glyphicon glyphicon-th">&nbsp;</span>Estacionados</a>
+  <a class="animated bounceInLeft" href="listaClientes.php"><span class="glyphicon glyphicon-th">&nbsp;</span>Clientes</a>
   <a class="animated bounceInLeft" onclick="LOG.salir()"><span class="glyphicon glyphicon-user">&nbsp;</span>Deslogear</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
 </div>

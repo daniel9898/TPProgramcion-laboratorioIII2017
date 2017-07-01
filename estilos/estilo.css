@@ -1,6 +1,13 @@
 body {
   margin: 0 auto;
-  background-color: #D3D3D3;
+  background-color: #FFA07A;
+}
+a{
+  color: black;
+}
+
+button{
+  color: black;
 }
 
 h2{
@@ -23,7 +30,7 @@ h4{
        border-radius: 0px ;
 }
  .btn{
-      box-shadow: 3px 2px 5px #000000;   
+      box-shadow: 3px 2px 5px #000000;  
   }
 
 

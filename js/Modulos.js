@@ -37,5 +37,8 @@ var ListaClientes;
         cliente.TraerVehiculos(idCliente);
     }
     ListaClientes.MostrarVehiculos = MostrarVehiculos;
+    function estacionarAutoRegistrado(idCliente) {
+    }
+    ListaClientes.estacionarAutoRegistrado = estacionarAutoRegistrado;
 })(ListaClientes || (ListaClientes = {}));
 //# sourceMappingURL=Modulos.js.map

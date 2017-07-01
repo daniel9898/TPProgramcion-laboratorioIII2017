@@ -18,16 +18,16 @@
                 <tbody id="filas"> 
 
                 <tr>
-                  <td><input type="text"/></td>
-                  <td><input type="text"/></td>
-                  <td><input type="text"/></td>
-                  <td><a class='btn btn-sm btn-success btn-block'>Estacionar</a></td>
+                  <td><input id="color" type="text"/></td>
+                  <td><input id="marca" type="text"/></td>
+                  <td><input id="patente" type="text"/></td>
+                  <td><button class='btn btn-sm btn-success' onclick="">Estacionar</button></td>
                 </tr>
                 </tbody> 
             </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-md btn-warning" data-dismiss="modal">Salir</button>
         </div>
       </div>
     </div>

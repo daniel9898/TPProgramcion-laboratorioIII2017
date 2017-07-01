@@ -7,8 +7,8 @@ var Cliente = (function () {
         this.urlApi = 'http://localHost:8080/tp-master/api-rest/';
     }
     ;
-    Cliente.prototype.InsertarCliente = function (respCallback) {
-        localStorage.setItem("idLugar", respCallback.idLugar);
+    Cliente.prototype.InsertarCliente = function (respEstacionam) {
+        localStorage.setItem("idLugar", respEstacionam.idLugar);
         jQuery.post(this.urlApi + 'clientes', this.TomarDatosCliente(), this.procesar);
     };
     Cliente.prototype.TomarDatosCliente = function () {
@@ -19,27 +19,27 @@ var Cliente = (function () {
         };
         return datos;
     };
-    Cliente.prototype.procesar = function (respCallback) {
-        if (respCallback.respuesta) {
+    Cliente.prototype.procesar = function (resp) {
+        if (resp.respuesta) {
             var vehiculo = new Vehiculo();
-            vehiculo.InsertarVehiculo(respCallback);
+            vehiculo.InsertarVehiculo(resp);
         }
         else
             $("#informe2").html("No hay lugares disponibles.");
     };
     Cliente.prototype.TraerVehiculos = function (idCliente) {
         $(".n").html("");
-        jQuery.get(this.urlApi + 'traerVehiculos/' + idCliente, this.MostrarVehic);
+        jQuery.get(this.urlApi + 'traerVehiculos/' + idCliente, this.MostrarListaVehiculos);
     };
-    Cliente.prototype.MostrarVehic = function (respCallback) {
-        if (respCallback.respuesta) {
-            var cantidad = respCallback.respuesta.length;
+    Cliente.prototype.MostrarListaVehiculos = function (resp) {
+        if (resp.respuesta) {
+            var cantidad = resp.respuesta.length;
             for (var i = 0; i < cantidad; i++) {
                 $("#filas").before("<tr class='n'>" +
-                    "<td>&nbsp;&nbsp;" + respCallback.respuesta[i].color + "</td>" +
-                    "<td>&nbsp;&nbsp;" + respCallback.respuesta[i].marca + "</td>" +
-                    "<td>&nbsp;&nbsp;" + respCallback.respuesta[i].patente + "</td>" +
-                    "<td><a class='btn btn-sm btn-success btn-block'>Estacionar</a></td>" +
+                    "<td>&nbsp;&nbsp;" + resp.respuesta[i].color + "</td>" +
+                    "<td>&nbsp;&nbsp;" + resp.respuesta[i].marca + "</td>" +
+                    "<td>&nbsp;&nbsp;" + resp.respuesta[i].patente + "</td>" +
+                    "<td>&nbsp;&nbsp;<button class='btn btn-sm btn-success' onclick=''>Estacionar</button></td>" +
                     "</tr>");
             }
         }

@@ -8,9 +8,9 @@ class Cliente
 
 	constructor() {};
 
-    public InsertarCliente(respCallback)
+    public InsertarCliente(respEstacionam)
     {
-      localStorage.setItem("idLugar",respCallback.idLugar);
+      localStorage.setItem("idLugar",respEstacionam.idLugar);
       jQuery.post(this.urlApi +'clientes',this.TomarDatosCliente(),this.procesar);
     }
 
@@ -24,12 +24,12 @@ class Cliente
 		  return datos;
     }
 
-    private procesar(respCallback):any 
+    private procesar(resp):any 
     {
-      if(respCallback.respuesta)
+      if(resp.respuesta)
       {
       	let vehiculo : Vehiculo = new Vehiculo();
-        vehiculo.InsertarVehiculo(respCallback);
+        vehiculo.InsertarVehiculo(resp);
       }
       else
          $("#informe2").html("No hay lugares disponibles.");
@@ -38,22 +38,22 @@ class Cliente
     public TraerVehiculos(idCliente)
     {
        $(".n").html("");
-       jQuery.get(this.urlApi +'traerVehiculos/'+ idCliente,this.MostrarVehic);
+       jQuery.get(this.urlApi +'traerVehiculos/'+ idCliente,this.MostrarListaVehiculos);
     }
 
-    private MostrarVehic(respCallback):any 
+    private MostrarListaVehiculos(resp):any 
     {
-      if(respCallback.respuesta)
+      if(resp.respuesta)
       {
-          var cantidad = respCallback.respuesta.length;
+          var cantidad = resp.respuesta.length;
           for(var i=0; i<cantidad; i++)
           {
             $("#filas").before(
                 "<tr class='n'>"+
-                    "<td>&nbsp;&nbsp;"+respCallback.respuesta[i].color+"</td>"+
-                    "<td>&nbsp;&nbsp;"+respCallback.respuesta[i].marca+"</td>"+
-                    "<td>&nbsp;&nbsp;"+respCallback.respuesta[i].patente+"</td>"+
-                    "<td><a class='btn btn-sm btn-success btn-block'>Estacionar</a></td>"+    
+                    "<td>&nbsp;&nbsp;"+resp.respuesta[i].color+"</td>"+
+                    "<td>&nbsp;&nbsp;"+resp.respuesta[i].marca+"</td>"+
+                    "<td>&nbsp;&nbsp;"+resp.respuesta[i].patente+"</td>"+
+                    "<td>&nbsp;&nbsp;<button class='btn btn-sm btn-success' onclick=''>Estacionar</button></td>"+    
                 "</tr>");
           }
       }

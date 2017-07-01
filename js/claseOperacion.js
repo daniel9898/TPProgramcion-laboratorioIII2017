@@ -8,7 +8,7 @@ var Operacion = (function () {
         this.urlApi = 'http://localHost:8080/tp-master/api-rest/';
     }
     ;
-    Operacion.prototype.InsertarOperacion = function (respCallback) {
+    Operacion.prototype.InsertarOperacion = function (respVehiculo) {
         var datos = {
             'idCliente': localStorage.getItem("idCliente"),
             'idAutomovil': localStorage.getItem("idCliente"),
@@ -17,10 +17,10 @@ var Operacion = (function () {
         };
         jQuery.post(this.urlApi + 'altaOperacion', datos, this.procesarRespuesta);
     };
-    Operacion.prototype.procesarRespuesta = function (respCallback) {
-        if (respCallback.respuesta) {
+    Operacion.prototype.procesarRespuesta = function (resp) {
+        if (resp.respuesta) {
             var registro = new Registro();
-            registro.InsertarRegistro(respCallback);
+            registro.InsertarRegistro(resp);
         }
         /*else
          informar en el div*/
@@ -31,8 +31,8 @@ var Operacion = (function () {
         var dato = { "idEmpleadoSalida": localStorage.getItem("idEmpleadoLog") };
         jQuery.post(this.urlApi + 'bajaOperacion/' + idOperacion, dato, this.procesar);
     };
-    Operacion.prototype.procesar = function (respCallback) {
-        if (respCallback.respuesta) {
+    Operacion.prototype.procesar = function (resp) {
+        if (resp.respuesta) {
             var idLugar = localStorage.getItem("idlugar");
             var estacionamiento = new Estacionamiento();
             estacionamiento.LiberarLugar(idLugar);

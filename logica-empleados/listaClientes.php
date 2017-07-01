@@ -31,7 +31,7 @@
 						<td>".$cliente->GetNombre()."</td>
 						<td>".$cliente->GetApellido()."</td>
 						<td>".$cliente->GetDni()."</td>
-						<td><button class='btn btn-warning' data-toggle='modal'
+						<td><button class='btn btn-success' data-toggle='modal'
 						data-target='#ModalClientes' 
 						onclick='ListaClientes.MostrarVehiculos(".$cliente->GetId().")'><span class='glyphicon glyphicon-share-alt'>&nbsp;</span>Vehiculos</button></td>
 					</tr>";

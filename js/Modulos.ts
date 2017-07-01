@@ -46,4 +46,9 @@ module ListaClientes // listaClientes.php
    {
       cliente.TraerVehiculos(idCliente);
    }
+
+   export function estacionarAutoRegistrado(idCliente)
+   {
+      
+   }
 }

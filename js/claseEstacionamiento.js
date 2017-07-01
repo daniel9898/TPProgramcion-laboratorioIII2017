@@ -17,10 +17,10 @@ var Estacionamiento = (function () {
             eslugarParaDiscap = "si";
         return eslugarParaDiscap;
     };
-    Estacionamiento.prototype.procesarRespuesta = function (respCallback) {
-        if (respCallback.idLugar != null) {
+    Estacionamiento.prototype.procesarRespuesta = function (resp) {
+        if (resp.idLugar != null) {
             var cliente = new Cliente();
-            cliente.InsertarCliente(respCallback);
+            cliente.InsertarCliente(resp);
         }
         /*else
             poner mensage en el div informe*/
@@ -28,12 +28,14 @@ var Estacionamiento = (function () {
     Estacionamiento.prototype.LiberarLugar = function (idLugar) {
         jQuery.post(this.urlApi + 'estacionamiento/' + idLugar, this.procesar);
     };
-    Estacionamiento.prototype.procesar = function (respCallBack) {
-        if (respCallBack.idLugar != null) {
+    Estacionamiento.prototype.procesar = function (resp) {
+        if (resp.idLugar != null) {
             var idRegistro = localStorage.getItem("idRegistro");
             var registro = new Registro();
             registro.Cerrar(idRegistro);
         }
+    };
+    Estacionamiento.prototype.EstacionarAutoYaRegistrado = function () {
     };
     return Estacionamiento;
 }());

@@ -33,7 +33,7 @@
 						<td>".$registros[$i][1]."</td>
 						<td>".$registros[$i][2]."</td>
 						<td>".$registros[$i][5]."</td>
-						<td><button class='btn btn-warning' data-toggle='modal' data-target='#myModal' 
+						<td><button class='btn btn-success' data-toggle='modal' data-target='#myModal' 
 						onclick='Listado.SacarVehiculo(".$registros[$i][3].",".$registros[$i][4].",".$registros[$i][5].")'><span class='glyphicon glyphicon-usd'>&nbsp;</span>Facturar</button></td>
 					</tr>";
 		}	

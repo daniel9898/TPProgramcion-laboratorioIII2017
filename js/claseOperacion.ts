@@ -9,10 +9,10 @@ class Operacion
 	
 	constructor() {};
 
-	public InsertarOperacion(respCallback)
+	public InsertarOperacion(respVehiculo)//por ahora no usa el parametro
 	{
 		let datos ={   
-		 	'idCliente':localStorage.getItem("idCliente"),
+		 	  'idCliente':localStorage.getItem("idCliente"),
 		    'idAutomovil':localStorage.getItem("idCliente"),
 		    'idLugar':localStorage.getItem("idLugar"),
 		    'idEmpleadoAlta':localStorage.getItem("idEmpleadoLog")
@@ -21,12 +21,12 @@ class Operacion
 	    jQuery.post(this.urlApi +'altaOperacion',datos,this.procesarRespuesta);
 	}
 
-	private procesarRespuesta(respCallback):any 
+	private procesarRespuesta(resp):any 
     {
-       if(respCallback.respuesta)
+       if(resp.respuesta)
        {
        	 let registro : Registro = new Registro();
-	     registro.InsertarRegistro(respCallback);
+	       registro.InsertarRegistro(resp);
        }
        /*else
        	informar en el div*/
@@ -41,9 +41,9 @@ class Operacion
 	    jQuery.post(this.urlApi +'bajaOperacion/'+ idOperacion,dato,this.procesar);
     }
 
-    private procesar(respCallback):any 
+    private procesar(resp):any 
     {
-    	if(respCallback.respuesta)
+    	if(resp.respuesta)
     	{ 
     	  let idLugar = localStorage.getItem("idlugar");
         let estacionamiento : Estacionamiento = new Estacionamiento();

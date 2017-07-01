@@ -7,10 +7,10 @@ var Vehiculo = (function () {
         this.urlApi = 'http://localHost:8080/tp-master/api-rest/';
     }
     ;
-    Vehiculo.prototype.InsertarVehiculo = function (respCallback) {
-        localStorage.setItem("horaAlta", respCallback.fecha);
-        localStorage.setItem("idCliente", respCallback.idCliente);
-        var datos = this.TomarDatosVehiculo(respCallback.idCliente);
+    Vehiculo.prototype.InsertarVehiculo = function (respCliente) {
+        localStorage.setItem("horaAlta", respCliente.fecha);
+        localStorage.setItem("idCliente", respCliente.idCliente);
+        var datos = this.TomarDatosVehiculo(respCliente.idCliente);
         jQuery.post(this.urlApi + 'vehiculos', datos, this.procesarRespuesta);
     };
     Vehiculo.prototype.TomarDatosVehiculo = function (idCliente) {
@@ -22,10 +22,10 @@ var Vehiculo = (function () {
         };
         return datos;
     };
-    Vehiculo.prototype.procesarRespuesta = function (respCallback) {
-        if (respCallback.respuesta) {
+    Vehiculo.prototype.procesarRespuesta = function (resp) {
+        if (resp.respuesta) {
             var operacion = new Operacion();
-            operacion.InsertarOperacion(respCallback);
+            operacion.InsertarOperacion(resp);
         }
     };
     return Vehiculo;

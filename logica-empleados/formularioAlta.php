@@ -14,7 +14,7 @@
         <div class="container col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
             <h2>Alta De Clientes :</h2>
             <h4>*Verifique La lista de clientes antes de registrar uno.</h4>
-            <a class="btn btn-lg btn-success btn-block form-group" href="listaClientes.php">Clientes Registrados</a>
+            <a style="background-color:#C0C0C0" class="btn btn-lg btn-block" href="listaClientes.php">Clientes Registrados</a>
             <br>
         <form class="form-login" onsubmit="Main.Insertar();return false">
             <div class=form-group>
@@ -32,7 +32,7 @@
                 <input type="text" id="marca" title="Se necesita la marca" class="form-control" placeholder="Marca" required="" autofocus="">
                 <input type="checkbox" id="discap"> Discapacitado<br><br>
             </div>
-            <button class="btn btn-lg btn-success btn-block" type="submit">Registrar</button>
+            <button style="background-color: #C0C0C0" class="btn btn-lg btn-block" type="submit">Registrar</button>
             <br>
             <div class=form-group id="informe2">
 

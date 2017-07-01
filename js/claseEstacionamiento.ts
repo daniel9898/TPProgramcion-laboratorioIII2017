@@ -23,12 +23,12 @@ class Estacionamiento
 	  return eslugarParaDiscap;
 	}
     
-    private procesarRespuesta(respCallback):any
+    private procesarRespuesta(resp):any
 	{ 
-		if(respCallback.idLugar != null)
+		if(resp.idLugar != null)
 		{
 		  let cliente : Cliente = new Cliente();
-		  cliente.InsertarCliente(respCallback);
+		  cliente.InsertarCliente(resp);
 		}
 		/*else
 			poner mensage en el div informe*/
@@ -39,13 +39,18 @@ class Estacionamiento
 	    jQuery.post(this.urlApi +'estacionamiento/'+idLugar,this.procesar);
 	}
 
-	private procesar(respCallBack)
+	private procesar(resp)
 	{
-		if(respCallBack.idLugar != null)//instanciar facturacion
+		if(resp.idLugar != null)
 		{
 			let idRegistro = localStorage.getItem("idRegistro");
 			let registro : Registro = new Registro();
 			registro.Cerrar(idRegistro);
 		}
+	}
+
+	public EstacionarAutoYaRegistrado()
+	{
+
 	}
 }

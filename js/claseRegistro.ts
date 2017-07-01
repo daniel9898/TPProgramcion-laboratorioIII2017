@@ -5,20 +5,20 @@ class Registro
 	//var urlApi = 'http://danielpereira.000webhostapp.com/api-rest/';
 	private urlApi : String = 'http://localHost:8080/tp-master/api-rest/';
 
-	public InsertarRegistro(respCallback)
+	public InsertarRegistro(respOperacion)
 	{
 		let datos ={   
 	    "idCliente": localStorage.getItem("idCliente"),
-	    "idOperacion": respCallback.idOperacion,
+	    "idOperacion": respOperacion.idOperacion,
 	    "horaAlta": localStorage.getItem("horaAlta")
 		};
 		
 	    jQuery.post(this.urlApi +'abrirRegistro',datos,this.procesarRespuesta);
 	}
 	
-	private procesarRespuesta(respCallback)
+	private procesarRespuesta(resp)
     {
-        if(respCallback.respuesta)
+        if(resp.respuesta)
            $("#informe2").html("Registro Exitoso."); 
         else 
           $("#informe2").html("Error,No se pudo guardar el registro.");
@@ -31,11 +31,12 @@ class Registro
 	    jQuery.post(this.urlApi +'cerrarRegistro/'+ idRegistro,dato,this.procesar);
 	}
 
-	private procesar(respCallback)
+	private procesar(resp)
 	{
-   	   if(respCallback.respuesta)
+   	   if(resp.respuesta)
    	   { 
-   	   	  $("#importe").html("$ "+respCallback.importe);
+   	   	  $("#importe").html("");
+   	   	  $("#importe").html("$ "+resp.importe);
           $("#myModal").modal();
           //window.location.replace("listaRegistros.php");
    	   }      
