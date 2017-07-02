@@ -15,7 +15,7 @@
 
 	$clientes = Cliente::TraerTodos();
 
-	echo "<h3><center>- Clientes :</center></h3>";
+	echo "<h2><center>Clientes :</center></h2>";
 	echo "<br><table class='table table-hover table-responsive'>
 			<thead>
 				<tr>

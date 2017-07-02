@@ -8,10 +8,10 @@ class Estacionamiento
 	
 	constructor() {};
 
-	public ObtenerlugarVacio():any
+	public ObtenerlugarVacio(callback):any
 	{
 	   let esDiscap = this.VerificarSiEsLugarParaDiscapacitados();
-	   jQuery.get(this.urlApi +'estacionamiento/'+ esDiscap ,this.procesarRespuesta);
+	   jQuery.get(this.urlApi +'estacionamiento/'+ esDiscap ,callback);
 	}
 
 	public VerificarSiEsLugarParaDiscapacitados():string
@@ -23,34 +23,30 @@ class Estacionamiento
 	  return eslugarParaDiscap;
 	}
     
-    private procesarRespuesta(resp):any
+    public ProcesarLugarVacio(resp):any
 	{ 
 		if(resp.idLugar != null)
 		{
 		  let cliente : Cliente = new Cliente();
-		  cliente.InsertarCliente(resp);
+		  cliente.InsertarCliente(resp,cliente.ProcesarGuardarCliente);
 		}
 		/*else
 			poner mensage en el div informe*/
 	}
 
-	public LiberarLugar(idLugar)
+	public LiberarLugar(idLugar,callback)
 	{
-	    jQuery.post(this.urlApi +'estacionamiento/'+idLugar,this.procesar);
+	    jQuery.post(this.urlApi +'estacionamiento/'+idLugar,callback);
 	}
 
-	private procesar(resp)
+	public procesarLiberarLugar(resp)
 	{
 		if(resp.idLugar != null)
 		{
 			let idRegistro = localStorage.getItem("idRegistro");
 			let registro : Registro = new Registro();
-			registro.Cerrar(idRegistro);
+			registro.Cerrar(idRegistro,registro.procesarCerrarRegistro);
 		}
 	}
 
-	public EstacionarAutoYaRegistrado()
-	{
-
-	}
 }

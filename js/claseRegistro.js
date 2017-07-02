@@ -5,25 +5,25 @@ var Registro = (function () {
         //var urlApi = 'http://danielpereira.000webhostapp.com/api-rest/';
         this.urlApi = 'http://localHost:8080/tp-master/api-rest/';
     }
-    Registro.prototype.InsertarRegistro = function (respOperacion) {
+    Registro.prototype.InsertarRegistro = function (idOperacion, callback) {
         var datos = {
             "idCliente": localStorage.getItem("idCliente"),
-            "idOperacion": respOperacion.idOperacion,
+            "idOperacion": idOperacion,
             "horaAlta": localStorage.getItem("horaAlta")
         };
-        jQuery.post(this.urlApi + 'abrirRegistro', datos, this.procesarRespuesta);
+        jQuery.post(this.urlApi + 'abrirRegistro', datos, callback);
     };
-    Registro.prototype.procesarRespuesta = function (resp) {
+    Registro.prototype.procesarInsertarRegistro = function (resp) {
         if (resp.respuesta)
             $("#informe2").html("Registro Exitoso.");
         else
             $("#informe2").html("Error,No se pudo guardar el registro.");
     };
-    Registro.prototype.Cerrar = function (idRegistro) {
+    Registro.prototype.Cerrar = function (idRegistro, callback) {
         var dato = { "horaAlta": localStorage.getItem("horaAlta") };
-        jQuery.post(this.urlApi + 'cerrarRegistro/' + idRegistro, dato, this.procesar);
+        jQuery.post(this.urlApi + 'cerrarRegistro/' + idRegistro, dato, callback);
     };
-    Registro.prototype.procesar = function (resp) {
+    Registro.prototype.procesarCerrarRegistro = function (resp) {
         if (resp.respuesta) {
             $("#importe").html("");
             $("#importe").html("$ " + resp.importe);

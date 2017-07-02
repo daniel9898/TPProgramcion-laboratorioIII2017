@@ -9,7 +9,7 @@ class Operacion
 	
 	constructor() {};
 
-	public InsertarOperacion(respVehiculo)//por ahora no usa el parametro
+	public InsertarOperacion(callback)
 	{
 		let datos ={   
 		 	  'idCliente':localStorage.getItem("idCliente"),
@@ -18,39 +18,40 @@ class Operacion
 		    'idEmpleadoAlta':localStorage.getItem("idEmpleadoLog")
 		    };
 		
-	    jQuery.post(this.urlApi +'altaOperacion',datos,this.procesarRespuesta);
+	    jQuery.post(this.urlApi +'altaOperacion',datos,callback);
 	}
 
-	private procesarRespuesta(resp):any 
-    {
-       if(resp.respuesta)
-       {
-       	 let registro : Registro = new Registro();
-	       registro.InsertarRegistro(resp);
-       }
-       /*else
-       	informar en el div*/
-    }
+	public ProcesarInsertarOperacion(resp):any 
+  {
+     if(resp.respuesta)
+     {
+       alert("entro");
+     	 let registro : Registro = new Registro();
+       registro.InsertarRegistro(resp.idOperacion,registro.procesarInsertarRegistro);
+     }
+     /*else
+     	informar en el div*/
+  }
 
-    public CerrarOperacion(idRegistro,idOperacion,idLugar)
-    {
-      localStorage.setItem("idRegistro",idRegistro);
-      localStorage.setItem("idlugar",idLugar);
+  public CerrarOperacion(idRegistro,idOperacion,idLugar,callback)
+  {
+    localStorage.setItem("idRegistro",idRegistro);
+    localStorage.setItem("idlugar",idLugar);
 
-	    let dato={ "idEmpleadoSalida": localStorage.getItem("idEmpleadoLog") };
-	    jQuery.post(this.urlApi +'bajaOperacion/'+ idOperacion,dato,this.procesar);
-    }
+    let dato={ "idEmpleadoSalida": localStorage.getItem("idEmpleadoLog") };
+    jQuery.post(this.urlApi +'bajaOperacion/'+ idOperacion,dato,callback);
+  }
 
-    private procesar(resp):any 
-    {
-    	if(resp.respuesta)
-    	{ 
-    	  let idLugar = localStorage.getItem("idlugar");
-        let estacionamiento : Estacionamiento = new Estacionamiento();
-        estacionamiento.LiberarLugar(idLugar);
-    	}
-    	/*else
-       	informar en el div*/
+  public procesarCerrarOperacion(resp):any 
+  {
+    if(resp.respuesta)
+    { 
+      let idLugar = localStorage.getItem("idlugar");
+      let estacionamiento : Estacionamiento = new Estacionamiento();
+      estacionamiento.LiberarLugar(idLugar,estacionamiento.procesarLiberarLugar);
     }
+    /*else
+       informar en el div*/
+  }
 
 }

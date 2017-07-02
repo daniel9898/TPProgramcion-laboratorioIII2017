@@ -1,21 +1,9 @@
-/// <reference path="claselog.ts"/>
+/// <reference path="jquery/index.d.ts" />
 /// <reference path="claseEstacionamiento.ts"/>
+/// <reference path="claseCliente.ts"/>
+/// <reference path="claseVehiculo.ts"/>
 /// <reference path="claseOperacion.ts"/>
-
-module LOG //index.html
-{
-   var log : Log = new Log();
-
-   export function entrar():void
-   {
-       log.VerificarUsuario();
-   }
-
-   export function salir():void
-   {
-       log.DeslogearUsuario();
-   }
-}
+/// <reference path="claseRegistro.ts"/>
 
 module Main // formularioAlta.php
 {
@@ -23,7 +11,7 @@ module Main // formularioAlta.php
 
    export function Insertar()
    {
-      estacionamiento.ObtenerlugarVacio();
+      estacionamiento.ObtenerlugarVacio(estacionamiento.ProcesarLugarVacio);
    }
 }
 
@@ -33,7 +21,7 @@ module Listado // listaRegistros.php
 
    export function SacarVehiculo(idRegistro,idOperacion,idLugar)
    {
-      operacion.CerrarOperacion(idRegistro,idOperacion,idLugar);
+      operacion.CerrarOperacion(idRegistro,idOperacion,idLugar,operacion.procesarCerrarOperacion);
    }
  
 }
@@ -44,11 +32,6 @@ module ListaClientes // listaClientes.php
 
    export function MostrarVehiculos(idCliente)
    {
-      cliente.TraerVehiculos(idCliente);
-   }
-
-   export function estacionarAutoRegistrado(idCliente)
-   {
-      
+      cliente.TraerVehiculos(idCliente,cliente.procesarListaVehiculos);
    }
 }

@@ -15,7 +15,7 @@
 
 	$registros = RegistroFinal::TraerRegistrosActivos();
 	//print_r($registros);
-    echo "<h3><center>- Estacionados :</center></h3>";
+    echo "<h2><center>Estacionados :</center></h2>";
 	echo "<br><table class='table table-hover table-responsive'>
 			<thead>
 				<tr>

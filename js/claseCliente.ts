@@ -8,10 +8,10 @@ class Cliente
 
 	constructor() {};
 
-    public InsertarCliente(respEstacionam)
+    public InsertarCliente(respEstacionam,callback)
     {
       localStorage.setItem("idLugar",respEstacionam.idLugar);
-      jQuery.post(this.urlApi +'clientes',this.TomarDatosCliente(),this.procesar);
+      jQuery.post(this.urlApi +'clientes',this.TomarDatosCliente(),callback);
     }
 
     private TomarDatosCliente():any
@@ -24,24 +24,27 @@ class Cliente
 		  return datos;
     }
 
-    private procesar(resp):any 
+    public ProcesarGuardarCliente(resp):any 
     {
       if(resp.respuesta)
       {
-      	let vehiculo : Vehiculo = new Vehiculo();
-        vehiculo.InsertarVehiculo(resp);
+        localStorage.setItem("idCliente",resp.idCliente);
+        localStorage.setItem("horaAlta",resp.fecha);
+
+        let vehiculo : Vehiculo = new Vehiculo();
+        vehiculo.InsertarVehiculo(resp.idCliente,vehiculo.procesarGuardarVehiculo);
       }
       else
-         $("#informe2").html("No hay lugares disponibles.");
+        $("#informe2").html("No hay lugares disponibles.");
     }
 
-    public TraerVehiculos(idCliente)
+    public TraerVehiculos(idCliente,callback)
     {
        $(".n").html("");
-       jQuery.get(this.urlApi +'traerVehiculos/'+ idCliente,this.MostrarListaVehiculos);
+       jQuery.get(this.urlApi +'traerVehiculos/'+ idCliente,callback);
     }
 
-    private MostrarListaVehiculos(resp):any 
+    public procesarListaVehiculos(resp):any 
     {
       if(resp.respuesta)
       {

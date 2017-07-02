@@ -7,9 +7,9 @@ var Cliente = (function () {
         this.urlApi = 'http://localHost:8080/tp-master/api-rest/';
     }
     ;
-    Cliente.prototype.InsertarCliente = function (respEstacionam) {
+    Cliente.prototype.InsertarCliente = function (respEstacionam, callback) {
         localStorage.setItem("idLugar", respEstacionam.idLugar);
-        jQuery.post(this.urlApi + 'clientes', this.TomarDatosCliente(), this.procesar);
+        jQuery.post(this.urlApi + 'clientes', this.TomarDatosCliente(), callback);
     };
     Cliente.prototype.TomarDatosCliente = function () {
         var datos = {
@@ -19,19 +19,21 @@ var Cliente = (function () {
         };
         return datos;
     };
-    Cliente.prototype.procesar = function (resp) {
+    Cliente.prototype.ProcesarGuardarCliente = function (resp) {
         if (resp.respuesta) {
+            localStorage.setItem("idCliente", resp.idCliente);
+            localStorage.setItem("horaAlta", resp.fecha);
             var vehiculo = new Vehiculo();
-            vehiculo.InsertarVehiculo(resp);
+            vehiculo.InsertarVehiculo(resp.idCliente, vehiculo.procesarGuardarVehiculo);
         }
         else
             $("#informe2").html("No hay lugares disponibles.");
     };
-    Cliente.prototype.TraerVehiculos = function (idCliente) {
+    Cliente.prototype.TraerVehiculos = function (idCliente, callback) {
         $(".n").html("");
-        jQuery.get(this.urlApi + 'traerVehiculos/' + idCliente, this.MostrarListaVehiculos);
+        jQuery.get(this.urlApi + 'traerVehiculos/' + idCliente, callback);
     };
-    Cliente.prototype.MostrarListaVehiculos = function (resp) {
+    Cliente.prototype.procesarListaVehiculos = function (resp) {
         if (resp.respuesta) {
             var cantidad = resp.respuesta.length;
             for (var i = 0; i < cantidad; i++) {

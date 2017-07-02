@@ -11,7 +11,8 @@ button{
 }
 
 h2{
-  font: small-caps 200%/280% Georgia;
+  font-family: Vegur, 'PT Sans', Verdana, Sans-serif;
+  /*font: small-caps 200%/280% Georgia;*/
 }
 h3{
   font: small-caps 150%/280% Georgia;

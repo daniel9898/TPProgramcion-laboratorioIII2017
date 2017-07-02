@@ -8,13 +8,11 @@ class Vehiculo
 	
 	constructor() {};
 
-	public InsertarVehiculo(respCliente)
+	public InsertarVehiculo(idCliente,callback)
 	{
-        localStorage.setItem("horaAlta",respCliente.fecha);
-		localStorage.setItem("idCliente",respCliente.idCliente);
-        let datos = this.TomarDatosVehiculo(respCliente.idCliente);
+        let datos = this.TomarDatosVehiculo(idCliente);
 
-        jQuery.post(this.urlApi +'vehiculos',datos,this.procesarRespuesta);
+        jQuery.post(this.urlApi +'vehiculos',datos,callback);
 	}
 
 	private TomarDatosVehiculo(idCliente):any
@@ -29,12 +27,12 @@ class Vehiculo
 	    return datos;
     }
 
-    private procesarRespuesta(resp):any 
+    public procesarGuardarVehiculo(resp):any 
     {
         if(resp.respuesta)
         {
         	let operacion : Operacion = new Operacion();
-	        operacion.InsertarOperacion(resp);
+	        operacion.InsertarOperacion(operacion.ProcesarInsertarOperacion);
         }
     }
 
