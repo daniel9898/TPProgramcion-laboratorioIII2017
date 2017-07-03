@@ -22,6 +22,7 @@ var Vehiculo = (function () {
     };
     Vehiculo.prototype.procesarGuardarVehiculo = function (resp) {
         if (resp.respuesta) {
+            localStorage.setItem("idAuto", resp.idAuto);
             var operacion = new Operacion();
             operacion.InsertarOperacion(operacion.ProcesarInsertarOperacion);
         }

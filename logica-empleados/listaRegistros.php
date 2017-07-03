@@ -14,7 +14,7 @@
 	require_once("../clases/registroFinal.php");
 
 	$registros = RegistroFinal::TraerRegistrosActivos();
-	//print_r($registros);
+	print_r($registros);
     echo "<h2><center>Estacionados :</center></h2>";
 	echo "<br><table class='table table-hover table-responsive'>
 			<thead>

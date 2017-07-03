@@ -31,6 +31,7 @@ class Vehiculo
     {
         if(resp.respuesta)
         {
+        	localStorage.setItem("idAuto",resp.idAuto);
         	let operacion : Operacion = new Operacion();
 	        operacion.InsertarOperacion(operacion.ProcesarInsertarOperacion);
         }

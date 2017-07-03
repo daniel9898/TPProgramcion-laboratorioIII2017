@@ -28,5 +28,12 @@ var ListaClientes;
         cliente.TraerVehiculos(idCliente, cliente.procesarListaVehiculos);
     }
     ListaClientes.MostrarVehiculos = MostrarVehiculos;
+    function EstacionarAutoYaRegistrado(idCliente, idAuto) {
+        localStorage.setItem("idCliente", idCliente);
+        localStorage.setItem("idAuto", idAuto);
+        var estacionamiento = new Estacionamiento();
+        estacionamiento.ObtenerlugarVacio(estacionamiento.ProcesarLugarVacioAutoYaRegistrado);
+    }
+    ListaClientes.EstacionarAutoYaRegistrado = EstacionarAutoYaRegistrado;
 })(ListaClientes || (ListaClientes = {}));
 //# sourceMappingURL=Modulos.js.map

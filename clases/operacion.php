@@ -37,4 +37,17 @@ class Operacion
 	   
 	}
 
+	public static function VerificarSiClienteYautoEstanEstacionados($idCliente,$idAuto)
+	{
+	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
+	    
+	    $consulta = $objetoAcceso->RetornarConsulta("select id_lugar from operaciones where id_cliente = :cliente and id_automovil= :auto and id_empleadoSalida is NULL");
+	    $consulta->bindParam(":cliente",$idCliente);
+	    $consulta->bindParam(":auto",$idAuto);
+	    $consulta->execute();
+	    $idOperacion = $consulta->fetchColumn(0);
+	    return $idOperacion;
+	   
+	}
+
 }

@@ -10,9 +10,7 @@ $app->post('/clientes',function($request,$response)
     if(!$resp || !isset($id))
       $status = 500;
 
-    $horaAlta = date('H:i:s d-m-Y');
-  
-    return $response->withJson(array("respuesta"=>$resp,"idCliente"=>$id,"fecha"=>$horaAlta));
+    return $response->withJson(array("respuesta"=>$resp,"idCliente"=>$id));
 
 });
 

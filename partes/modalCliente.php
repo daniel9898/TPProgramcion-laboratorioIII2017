@@ -27,6 +27,7 @@
             </table>
         </div>
         <div class="modal-footer">
+          <div id="informeM"></div>
           <button type="button" class="btn btn-md btn-warning" data-dismiss="modal">Salir</button>
         </div>
       </div>

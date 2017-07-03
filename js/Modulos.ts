@@ -34,4 +34,12 @@ module ListaClientes // listaClientes.php
    {
       cliente.TraerVehiculos(idCliente,cliente.procesarListaVehiculos);
    }
+
+   export function EstacionarAutoYaRegistrado(idCliente,idAuto)
+   {
+      localStorage.setItem("idCliente",idCliente);
+      localStorage.setItem("idAuto",idAuto);
+      var estacionamiento : Estacionamiento = new Estacionamiento();
+      estacionamiento.ObtenerlugarVacio(estacionamiento.ProcesarLugarVacioAutoYaRegistrado); 
+   }
 }

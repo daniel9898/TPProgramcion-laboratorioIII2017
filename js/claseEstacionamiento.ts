@@ -30,8 +30,8 @@ class Estacionamiento
 		  let cliente : Cliente = new Cliente();
 		  cliente.InsertarCliente(resp,cliente.ProcesarGuardarCliente);
 		}
-		/*else
-			poner mensage en el div informe*/
+		else
+			alert("NO HAY MAS LUGARES DISPONIBLES");
 	}
 
 	public LiberarLugar(idLugar,callback)
@@ -47,6 +47,18 @@ class Estacionamiento
 			let registro : Registro = new Registro();
 			registro.Cerrar(idRegistro,registro.procesarCerrarRegistro);
 		}
+	}
+
+	public ProcesarLugarVacioAutoYaRegistrado(resp):any
+	{ 
+		if(resp.idLugar != null)
+		{
+		  localStorage.setItem("idLugar",resp.idLugar);		
+		  let operacion : Operacion = new Operacion();
+		  operacion.InsertarOperacion(operacion.ProcesarInsertarOperacion);
+		}
+		else
+			alert("NO HAY MAS LUGARES DISPONIBLES");
 	}
 
 }

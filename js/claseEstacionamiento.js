@@ -22,8 +22,8 @@ var Estacionamiento = (function () {
             var cliente = new Cliente();
             cliente.InsertarCliente(resp, cliente.ProcesarGuardarCliente);
         }
-        /*else
-            poner mensage en el div informe*/
+        else
+            alert("NO HAY MAS LUGARES DISPONIBLES");
     };
     Estacionamiento.prototype.LiberarLugar = function (idLugar, callback) {
         jQuery.post(this.urlApi + 'estacionamiento/' + idLugar, callback);
@@ -34,6 +34,15 @@ var Estacionamiento = (function () {
             var registro = new Registro();
             registro.Cerrar(idRegistro, registro.procesarCerrarRegistro);
         }
+    };
+    Estacionamiento.prototype.ProcesarLugarVacioAutoYaRegistrado = function (resp) {
+        if (resp.idLugar != null) {
+            localStorage.setItem("idLugar", resp.idLugar);
+            var operacion = new Operacion();
+            operacion.InsertarOperacion(operacion.ProcesarInsertarOperacion);
+        }
+        else
+            alert("NO HAY MAS LUGARES DISPONIBLES");
     };
     return Estacionamiento;
 }());

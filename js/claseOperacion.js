@@ -11,7 +11,7 @@ var Operacion = (function () {
     Operacion.prototype.InsertarOperacion = function (callback) {
         var datos = {
             'idCliente': localStorage.getItem("idCliente"),
-            'idAutomovil': localStorage.getItem("idCliente"),
+            'idAutomovil': localStorage.getItem("idAuto"),
             'idLugar': localStorage.getItem("idLugar"),
             'idEmpleadoAlta': localStorage.getItem("idEmpleadoLog")
         };
@@ -19,12 +19,13 @@ var Operacion = (function () {
     };
     Operacion.prototype.ProcesarInsertarOperacion = function (resp) {
         if (resp.respuesta) {
-            alert("entro");
+            localStorage.setItem("horaAlta", resp.horaAlta);
             var registro = new Registro();
             registro.InsertarRegistro(resp.idOperacion, registro.procesarInsertarRegistro);
         }
-        /*else
-           informar en el div*/
+        else {
+            $("#informeM").html("<h4>El vehiculo que intenta estacionar ya se encuentra en playa lugar : " + resp.lugar + "</h4>");
+        }
     };
     Operacion.prototype.CerrarOperacion = function (idRegistro, idOperacion, idLugar, callback) {
         localStorage.setItem("idRegistro", idRegistro);

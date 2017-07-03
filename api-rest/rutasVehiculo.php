@@ -41,8 +41,10 @@ $app->post('/vehiculos',function($request,$response)
         $parametros['idCliente']);
     else
         $status = 404;
+
+    $id = Automovil::TraerUltimoIdAgregado();
     
-    return $response->withJson(array("respuesta"=>$resp),$status); 
+    return $response->withJson(array("respuesta"=>$resp,"idAuto"=>$id),$status); 
 });
 
 $app->get('/vehiculosBaja/{id}',function($request,$response) 

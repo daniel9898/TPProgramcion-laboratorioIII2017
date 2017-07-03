@@ -13,7 +13,7 @@ class Operacion
 	{
 		let datos ={   
 		 	  'idCliente':localStorage.getItem("idCliente"),
-		    'idAutomovil':localStorage.getItem("idCliente"),
+		    'idAutomovil':localStorage.getItem("idAuto"),
 		    'idLugar':localStorage.getItem("idLugar"),
 		    'idEmpleadoAlta':localStorage.getItem("idEmpleadoLog")
 		    };
@@ -25,12 +25,14 @@ class Operacion
   {
      if(resp.respuesta)
      {
-       alert("entro");
+       localStorage.setItem("horaAlta",resp.horaAlta);
      	 let registro : Registro = new Registro();
        registro.InsertarRegistro(resp.idOperacion,registro.procesarInsertarRegistro);
      }
-     /*else
-     	informar en el div*/
+     else
+     {
+       $("#informeM").html("<h4>El vehiculo que intenta estacionar ya se encuentra en playa lugar : "+resp.lugar+"</h4>");
+     }
   }
 
   public CerrarOperacion(idRegistro,idOperacion,idLugar,callback)

@@ -120,7 +120,16 @@ class Automovil
 	    $consulta->bindParam(":id_cliente",$id_cliente);
 	    return $consulta->execute();
 	}
-
+    
+    public static function TraerUltimoIdAgregado()
+	{
+	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
+	    
+	    $consulta = $objetoAcceso->RetornarConsulta("select id_automovil from Automovil order by id_automovil DESC limit 1");
+	    $consulta->execute();
+	    $idAuto = $consulta->fetchColumn(0);
+	    return $idAuto;
+	}
 
 }
 
