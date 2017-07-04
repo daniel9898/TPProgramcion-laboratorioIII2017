@@ -61,4 +61,17 @@ class Estacionamiento
 			alert("NO HAY MAS LUGARES DISPONIBLES");
 	}
 
+	public ProcesarLugarVacioClienteYaRegistrado(resp):any
+	{ 
+		if(resp.idLugar != null)
+		{
+		  localStorage.setItem("idLugar",resp.idLugar);
+		  let idCliente = localStorage.getItem("idCliente");		
+          let vehiculo : Vehiculo = new Vehiculo();
+          vehiculo.InsertarVehiculo(idCliente,vehiculo.procesarGuardarVehiculo);
+		}
+		else
+			alert("NO HAY MAS LUGARES DISPONIBLES");
+	}
+
 }

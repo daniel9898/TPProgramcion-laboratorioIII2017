@@ -34,9 +34,9 @@
             </div>
             <button style="background-color: #C0C0C0" class="btn btn-lg btn-block" type="submit">Registrar</button>
             <br>
-            <div class=form-group id="informe2">
+       
+            <?php require "../partes/modalAlta.php"; ?>
 
-            </div>
         </form>
       
       </div>

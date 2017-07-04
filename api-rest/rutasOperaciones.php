@@ -5,6 +5,11 @@ $app->post('/altaOperacion',function($request,$response)
     $parametros = $request->getParams('idCliente','idAutomovil','idLugar','idEmpleadoAlta');
     $esta = Operacion::VerificarSiClienteYautoEstanEstacionados($parametros['idCliente'],
         $parametros['idAutomovil']);
+
+    $resp = false;
+    $id = false;
+    $horaAlta = false;
+    
     if($esta == null) 
     {
         $resp = Operacion::Insertar($parametros['idCliente'],$parametros['idAutomovil'],

@@ -22,9 +22,9 @@ var Log = (function () {
         if (retorno.respuesta) {
             localStorage.setItem("idEmpleadoLog", retorno.idEmpleado);
             if (retorno.idEmpleado == 3)
-                window.location.replace("logica-administrador/administrador.html");
+                window.location.replace("vistas/administrador.php");
             else
-                window.location.replace("logica-empleados/formularioAlta.php");
+                window.location.replace("vistas/formularioAlta.php");
         }
         else
             $("#informe").html("Usuario o contraseña incorrecta.");

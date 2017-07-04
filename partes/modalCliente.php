@@ -21,7 +21,8 @@
                   <td><input id="color" type="text"/></td>
                   <td><input id="marca" type="text"/></td>
                   <td><input id="patente" type="text"/></td>
-                  <td><button class='btn btn-sm btn-success' onclick="">Estacionar</button></td>
+                  <td><button class='btn btn-sm btn-success'
+                  onclick="ListaClientes.EstacionarNuevoAutoDeClienteRegistrado()">Estacionar</button></td>
                 </tr>
                 </tbody> 
             </table>

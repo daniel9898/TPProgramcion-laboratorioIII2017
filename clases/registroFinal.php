@@ -51,13 +51,15 @@ class RegistroFinal
     }
 
     public static function TraerRegistrosActivos()
-    {//and operaciones.id_empleadoSalida is NULL
-        $objetoAcceso = AccesoDatos::DameUnObjetoAcceso();
+    {
+
+       $objetoAcceso = AccesoDatos::DameUnObjetoAcceso();
 	    $consulta = $objetoAcceso->RetornarConsulta("select apellido,patente,hora_entrada,registro_final.id_operacion,id_registro,operaciones.id_lugar
-		from automovil inner join clientes on clientes.id_cliente=automovil.id_cliente 
-		inner join registro_final on clientes.id_cliente=registro_final.id_cliente 
-		inner join operaciones on clientes.id_cliente=operaciones.id_cliente
-		where operaciones.id_empleadoSalida is NULL and registro_final.hora_salida is NULL ");
+		from clientes inner join automovil on clientes.id_cliente=automovil.id_cliente 
+		inner join operaciones on clientes.id_cliente=operaciones.id_cliente 
+		inner join registro_final on clientes.id_cliente=registro_final.id_cliente
+		where operaciones.id_empleadoSalida is NULL and registro_final.hora_salida is NULL
+		and automovil.id_automovil=operaciones.id_automovil");
 		$consulta->execute();
 	    $registros = $consulta->fetchAll();
 	    return $registros;

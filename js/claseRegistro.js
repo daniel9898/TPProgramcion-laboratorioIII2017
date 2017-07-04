@@ -14,10 +14,16 @@ var Registro = (function () {
         jQuery.post(this.urlApi + 'abrirRegistro', datos, callback);
     };
     Registro.prototype.procesarInsertarRegistro = function (resp) {
-        if (resp.respuesta)
-            $("#informe2").html("Registro Exitoso.");
-        else
-            $("#informe2").html("Error,No se pudo guardar el registro.");
+        if (resp.respuesta) {
+            var lugar = localStorage.getItem("idLugar");
+            $("#informeAlta").html("<h3>Operación Exitosa ! estacionar en el lugar : " + lugar + "</h3>");
+            $("#ModalAlta").modal();
+            this.LimpiarFormulario(); //NO FUNCIONA
+        }
+        else {
+            $("#informeAlta").html("<h3>Error,No se pudo guardar el registro.</h3>");
+            $("#ModalAlta").modal();
+        }
     };
     Registro.prototype.Cerrar = function (idRegistro, callback) {
         var dato = { "horaAlta": localStorage.getItem("horaAlta") };
@@ -28,8 +34,15 @@ var Registro = (function () {
             $("#importe").html("");
             $("#importe").html("$ " + resp.importe);
             $("#myModal").modal();
-            //window.location.replace("listaRegistros.php");
         }
+    };
+    Registro.prototype.LimpiarFormulario = function () {
+        $("#nombre").val("");
+        $("#apellido").val("");
+        $("#dni").val("");
+        $("#patente").val("");
+        $("#color").val("");
+        $("#marca").val("");
     };
     return Registro;
 }());

@@ -48,9 +48,14 @@ CREATE TABLE `empleados` (
 `usuario` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
 `contraseña` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
 `id_cargo` int(11) NOT NULL,
-`logeado` varchar(3) NOT NULL,
+`Esta_logeado` varchar(3) NOT NULL,
 FOREIGN KEY (id_cargo) REFERENCES cargos(id_cargo)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+INSERT INTO `empleados` (`nombre`,`apellido`,`usuario`,`contraseña`,`id_cargo`,`Esta_logeado`) VALUES
+('ruben','paz','cajero1','cj1',2,'no'),
+('marco','ruben','cajero2','cj2',2,'no'),
+('daniel','paz','admin','adm',1,'no');
 
 CREATE TABLE `operaciones` (
 `id_operacion` int(11) NOT NULL AUTO_INCREMENT UNIQUE KEY AUTO_INCREMENT,
@@ -76,3 +81,17 @@ CREATE TABLE `registro_final` (
 FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente),
 FOREIGN KEY (id_operacion) REFERENCES operaciones(id_operacion)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+CREATE TABLE `logins` (
+`id_login` int(11) NOT NULL UNIQUE KEY AUTO_INCREMENT,
+`id_empleado` int(11) NOT NULL,
+`fecha_apertura` varchar(11) NOT NULL,
+`fecha_cierre` varchar(11),
+FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+INSERT INTO `logins` (`id_empleado`,`fecha_apertura`,`fecha_cierre`) VALUES
+(1,'2017-07-04 12:28:27','2017-07-04 18:28:27'),
+(3,'2017-07-04 19:28:27','2017-07-04 22:28:27'),
+(1,'2017-07-03 11:28:27','2017-07-03 14:28:27'),
+(2,'2017-08-01 13:28:27','2017-08-01 15:28:27');

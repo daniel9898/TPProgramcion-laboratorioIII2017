@@ -25,15 +25,20 @@ var ListaClientes;
 (function (ListaClientes) {
     var cliente = new Cliente();
     function MostrarVehiculos(idCliente) {
+        localStorage.setItem("idCliente", idCliente);
         cliente.TraerVehiculos(idCliente, cliente.procesarListaVehiculos);
     }
     ListaClientes.MostrarVehiculos = MostrarVehiculos;
-    function EstacionarAutoYaRegistrado(idCliente, idAuto) {
-        localStorage.setItem("idCliente", idCliente);
+    function EstacionarAutoYaRegistrado(idAuto) {
         localStorage.setItem("idAuto", idAuto);
         var estacionamiento = new Estacionamiento();
         estacionamiento.ObtenerlugarVacio(estacionamiento.ProcesarLugarVacioAutoYaRegistrado);
     }
     ListaClientes.EstacionarAutoYaRegistrado = EstacionarAutoYaRegistrado;
+    function EstacionarNuevoAutoDeClienteRegistrado() {
+        var estacionamiento = new Estacionamiento();
+        estacionamiento.ObtenerlugarVacio(estacionamiento.ProcesarLugarVacioClienteYaRegistrado);
+    }
+    ListaClientes.EstacionarNuevoAutoDeClienteRegistrado = EstacionarNuevoAutoDeClienteRegistrado;
 })(ListaClientes || (ListaClientes = {}));
 //# sourceMappingURL=Modulos.js.map

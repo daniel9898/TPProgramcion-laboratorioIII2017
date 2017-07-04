@@ -38,7 +38,8 @@
 		}	
 	echo "</table>";
 
-	require "../partes/ModalCliente.php";		
+	require "../partes/ModalCliente.php";
+	require "../partes/modalAlta.php";		
 ?>
 </body>
 </html>

@@ -55,7 +55,7 @@ class Cliente
                     "<td>&nbsp;&nbsp;"+resp.respuesta[i].color+"</td>"+
                     "<td>&nbsp;&nbsp;"+resp.respuesta[i].marca+"</td>"+
                     "<td>&nbsp;&nbsp;"+resp.respuesta[i].patente+"</td>"+
-                    "<td>&nbsp;&nbsp;<button class='btn btn-sm btn-success' onclick='ListaClientes.EstacionarAutoYaRegistrado("+resp.respuesta[i].id_automovil+","+resp.respuesta[i].id_cliente+")'>Estacionar</button></td>"+    
+                    "<td>&nbsp;&nbsp;<button class='btn btn-sm btn-success' onclick='ListaClientes.EstacionarAutoYaRegistrado("+resp.respuesta[i].id_automovil+")'>Estacionar</button></td>"+    
                 "</tr>");
           }
       }

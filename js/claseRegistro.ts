@@ -19,9 +19,18 @@ class Registro
 	public procesarInsertarRegistro(resp)
     {
         if(resp.respuesta)
-           $("#informe2").html("Registro Exitoso."); 
-        else 
-          $("#informe2").html("Error,No se pudo guardar el registro.");
+        {
+          let lugar = localStorage.getItem("idLugar");
+          $("#informeAlta").html("<h3>Operación Exitosa ! estacionar en el lugar : "+lugar+"</h3>");
+          $("#ModalAlta").modal();
+          this.LimpiarFormulario(); //NO FUNCIONA
+        }
+        else
+        {
+    	  $("#informeAlta").html("<h3>Error,No se pudo guardar el registro.</h3>");
+    	  $("#ModalAlta").modal();
+        } 
+          
     }
 
     public Cerrar(idRegistro,callback)
@@ -38,8 +47,17 @@ class Registro
    	   	  $("#importe").html("");
    	   	  $("#importe").html("$ "+resp.importe);
           $("#myModal").modal();
-          //window.location.replace("listaRegistros.php");
    	   }      
+	}
+
+	private LimpiarFormulario():void 
+	{
+		$("#nombre").val("");
+		$("#apellido").val("");
+		$("#dni").val("");
+		$("#patente").val("");
+		$("#color").val("");
+		$("#marca").val("");
 	}
 
 }

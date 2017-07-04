@@ -32,14 +32,20 @@ module ListaClientes // listaClientes.php
 
    export function MostrarVehiculos(idCliente)
    {
+      localStorage.setItem("idCliente",idCliente);
       cliente.TraerVehiculos(idCliente,cliente.procesarListaVehiculos);
    }
 
-   export function EstacionarAutoYaRegistrado(idCliente,idAuto)
+   export function EstacionarAutoYaRegistrado(idAuto)
    {
-      localStorage.setItem("idCliente",idCliente);
       localStorage.setItem("idAuto",idAuto);
       var estacionamiento : Estacionamiento = new Estacionamiento();
       estacionamiento.ObtenerlugarVacio(estacionamiento.ProcesarLugarVacioAutoYaRegistrado); 
+   }
+
+   export function EstacionarNuevoAutoDeClienteRegistrado()
+   {
+      let estacionamiento : Estacionamiento = new Estacionamiento();
+      estacionamiento.ObtenerlugarVacio(estacionamiento.ProcesarLugarVacioClienteYaRegistrado); 
    }
 }

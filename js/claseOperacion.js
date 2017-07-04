@@ -18,13 +18,16 @@ var Operacion = (function () {
         jQuery.post(this.urlApi + 'altaOperacion', datos, callback);
     };
     Operacion.prototype.ProcesarInsertarOperacion = function (resp) {
+        alert(resp.respuesta);
         if (resp.respuesta) {
             localStorage.setItem("horaAlta", resp.horaAlta);
             var registro = new Registro();
             registro.InsertarRegistro(resp.idOperacion, registro.procesarInsertarRegistro);
         }
         else {
-            $("#informeM").html("<h4>El vehiculo que intenta estacionar ya se encuentra en playa lugar : " + resp.lugar + "</h4>");
+            console.log(resp); //VERIFICAR PORQUE NO MUESTRA EL MSJ 
+            alert("El vehiculo que intenta estacionar ya se encuentra en playa, lugar : " + resp.lugar);
+            $("div.modal-content #informeM").html("<h4>El vehiculo que intenta estacionar ya se encuentra en playa, lugar : " + resp.lugar + "</h4>");
         }
     };
     Operacion.prototype.CerrarOperacion = function (idRegistro, idOperacion, idLugar, callback) {

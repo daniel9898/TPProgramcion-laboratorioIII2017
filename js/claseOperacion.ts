@@ -23,6 +23,7 @@ class Operacion
 
 	public ProcesarInsertarOperacion(resp):any 
   {
+     alert(resp.respuesta);
      if(resp.respuesta)
      {
        localStorage.setItem("horaAlta",resp.horaAlta);
@@ -31,7 +32,9 @@ class Operacion
      }
      else
      {
-       $("#informeM").html("<h4>El vehiculo que intenta estacionar ya se encuentra en playa lugar : "+resp.lugar+"</h4>");
+       console.log(resp);//VERIFICAR PORQUE NO MUESTRA EL MSJ 
+       alert("El vehiculo que intenta estacionar ya se encuentra en playa, lugar : "+resp.lugar);
+       $("div.modal-content #informeM").html("<h4>El vehiculo que intenta estacionar ya se encuentra en playa, lugar : "+resp.lugar+"</h4>");
      }
   }
 

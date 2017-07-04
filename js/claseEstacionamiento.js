@@ -44,6 +44,16 @@ var Estacionamiento = (function () {
         else
             alert("NO HAY MAS LUGARES DISPONIBLES");
     };
+    Estacionamiento.prototype.ProcesarLugarVacioClienteYaRegistrado = function (resp) {
+        if (resp.idLugar != null) {
+            localStorage.setItem("idLugar", resp.idLugar);
+            var idCliente = localStorage.getItem("idCliente");
+            var vehiculo = new Vehiculo();
+            vehiculo.InsertarVehiculo(idCliente, vehiculo.procesarGuardarVehiculo);
+        }
+        else
+            alert("NO HAY MAS LUGARES DISPONIBLES");
+    };
     return Estacionamiento;
 }());
 //# sourceMappingURL=claseEstacionamiento.js.map
