@@ -47,7 +47,23 @@ class Operacion
 	    $consulta->execute();
 	    $idOperacion = $consulta->fetchColumn(0);
 	    return $idOperacion;
-	   
+	}
+
+	public static function TraerOperacionesPorEmpleado($parametros)
+	{
+	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
+	    
+	    $consulta = $objetoAcceso->RetornarConsulta("select
+	         t.hora_entrada,id_empleadoEntrada as empleado,operaciones.id_operacion from 
+	    	(select id_operacion,hora_entrada from registro_final where hora_entrada BETWEEN :fecha1 
+	    	 AND :fecha2)t inner join operaciones on t.id_operacion=operaciones.id_operacion
+	    	 and operaciones.id_empleadoEntrada=:id");
+	    $consulta->bindParam(":id",$parametros['idEmp']);
+	    $consulta->bindParam(":fecha1",$parametros['desde']);
+	    $consulta->bindParam(":fecha2",$parametros['hasta']);
+	    $consulta->execute();
+	    $cantOperaciones = $consulta->fetchall(PDO::FETCH_ASSOC);
+	    return $cantOperaciones;
 	}
 
 }

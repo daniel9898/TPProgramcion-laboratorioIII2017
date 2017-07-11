@@ -6,7 +6,7 @@ class Estacionamiento
 	{
        	$objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    
-	    $consulta = $objetoAcceso->RetornarConsulta("select MIN(id_lugar) from lugares where disponibilidad = 'vacio' and discapacitados = :valor");
+	    $consulta = $objetoAcceso->RetornarConsulta("select MIN(id_lugar) as lugarVacio,piso from lugares where disponibilidad = 'vacio' and discapacitados = :valor");
 	    $consulta->bindParam(":valor",$discap);
 	    $consulta->execute();
 	    $lugarVacio = $consulta->fetch(PDO::FETCH_ASSOC);

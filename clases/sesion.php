@@ -5,7 +5,7 @@ class Sesion
 	public static function ValidarLogin($parametros)
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso();
-	    $consulta = $objetoAcceso->RetornarConsulta("Select id_empleado from empleados where usuario = :valor1 and contraseña = :valor2");
+	    $consulta = $objetoAcceso->RetornarConsulta("Select id_empleado from empleados where usuario = :valor1 and contraseña = :valor2 and estado='activo'");
 	    $consulta->bindParam(":valor1",$parametros['usuario']);
 	    $consulta->bindParam(":valor2",$parametros['clave']);
 	    $consulta->execute();

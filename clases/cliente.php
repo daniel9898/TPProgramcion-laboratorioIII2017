@@ -61,7 +61,7 @@ class Cliente
 	    return $consulta->execute();
 	}
 
-	public function ComprobarSiExiste($id)
+	public static function ComprobarSiExisteCliente($id)
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    $consulta = $objetoAcceso->RetornarConsulta("select count(id_cliente) from clientes where id_cliente = :id");
@@ -84,15 +84,16 @@ class Cliente
 	    return $consulta;
 	}
 
-	public static function TraerVehiculos($idCliente)
+	public function TraerVehiculosDB($idCliente)
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    
-	    $consulta = $objetoAcceso->RetornarConsulta("SELECT * from automovil where id_cliente = :id");
+	    $consulta = $objetoAcceso->RetornarConsulta("select * from automovil where id_cliente = :id");
 	    $consulta->bindParam(":id",$idCliente);
 	    $consulta->execute();
 	    $datos = $consulta->fetchAll(PDO::FETCH_ASSOC);
 	    return $datos;
+
 	}
 
 }

@@ -23,7 +23,7 @@ class RegistroFinal
     	$objetoAcceso = AccesoDatos::DameUnObjetoAcceso();
 	    $consulta = $objetoAcceso->RetornarConsulta('update registro_final set hora_salida = :valor1,
         importe = :valor2
-	    where id_operacion = :id');
+	    where id_registro = :id');
 	    $consulta->bindParam(":valor1",$horaSalida);
 	    $consulta->bindParam(":valor2",$importe);
 	    $consulta->bindParam(":id",$id_registro);
@@ -65,7 +65,7 @@ class RegistroFinal
 	    return $registros;
     }
 
-    public static function TraerUltimoIdAgregado()
+    public static function TraerUltimoIdAgregadoDB()
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    
@@ -73,7 +73,23 @@ class RegistroFinal
 	    $consulta->execute();
 	    $id = $consulta->fetchColumn(0);
 	    return $id;
-	   
+	}
+
+	public function TraerInformeDB($fechas)
+	{
+	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
+	    
+	    $consulta = $objetoAcceso->RetornarConsulta("select patente,lugares.id_lugar as lugar,lugares.piso,hora_entrada as entrada,hora_salida as salida,importe from
+	        registro_final inner join operaciones on 
+	        registro_final.id_operacion=operaciones.id_operacion
+	        inner join lugares on lugares.id_lugar=operaciones.id_lugar
+	        inner join automovil on automovil.id_automovil=operaciones.id_automovil
+	        where hora_entrada BETWEEN :fecha1 AND :fecha2");
+	    $consulta->bindParam(":fecha1",$fechas['desde']);
+	    $consulta->bindParam(":fecha2",$fechas['hasta']);
+	    $consulta->execute();
+	    $informe = $consulta->fetchall(PDO::FETCH_ASSOC);
+	    return $informe;
 	}
 	
 }

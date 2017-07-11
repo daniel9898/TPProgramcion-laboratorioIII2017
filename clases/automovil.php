@@ -1,5 +1,5 @@
 <?php
-
+require_once 'cliente.php';
 class Automovil 
 {
 	public $id_automovil;
@@ -50,7 +50,7 @@ class Automovil
 	}
 
 
-	public static function TraerTodos()
+	public function TraerTodosDB()
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    
@@ -81,7 +81,7 @@ class Automovil
 	    return $consulta->execute();
 	}
 
-	public function ComprobarSiExiste($id)
+	public static function ComprobarSiExiste($id)
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    $consulta = $objetoAcceso->RetornarConsulta("select count(id_automovil) from automovil where id_automovil = :id");
@@ -125,10 +125,18 @@ class Automovil
 	{
 	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
 	    
-	    $consulta = $objetoAcceso->RetornarConsulta("select id_automovil from Automovil order by id_automovil DESC limit 1");
+	    $consulta = $objetoAcceso->RetornarConsulta("select id_automovil from automovil order by id_automovil DESC limit 1");
 	    $consulta->execute();
 	    $idAuto = $consulta->fetchColumn(0);
 	    return $idAuto;
+	}
+
+	public static function ModificarRestriccionDeClaveForanea($flag)
+	{
+	    $objetoAcceso = AccesoDatos::DameUnObjetoAcceso(); 
+	    
+	    $consulta = $objetoAcceso->RetornarConsulta("SET foreign_key_checks = ".$flag."");
+	    return $consulta->execute();
 	}
 
 }
